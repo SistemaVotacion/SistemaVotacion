@@ -9,6 +9,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+/*
+ * Carrasco, Nathan
+ * Herrera, Francisco
+ * Wu, Iván
+ */
 
 namespace login.Controllers
 {
@@ -33,7 +38,7 @@ namespace login.Controllers
             return Unauthorized(new { message = "Invalid username or password." });
         }
 
-        public class LoginRequest //dfhkbssdf
+        public class LoginRequest //dfhkb
         {
             public string Username { get; set; }
             public string Password { get; set; }
@@ -44,15 +49,6 @@ namespace login.Controllers
             public string Username { get; set; }
             public string Password { get; set; }
         }
-
-
-
-/*
- * Carrasco, Nathan
- * Herrera, Francisco
- * Wu, Iván
- */
-
 
         internal class ConexionDB
         {
