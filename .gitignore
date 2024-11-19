@@ -3,3 +3,14 @@
 ################################################################################
 
 /.vs
+/bin/Debug/net8.0/login.dll
+/bin/Debug/net8.0/login.exe
+/bin/Debug/net8.0/login.pdb
+/obj/Debug/net8.0/ref/login.dll
+/obj/Debug/net8.0/refint/login.dll
+/obj/Debug/net8.0/apphost.exe
+/obj/Debug/net8.0/login.AssemblyInfo.cs
+/obj/Debug/net8.0/login.AssemblyInfoInputs.cache
+/obj/Debug/net8.0/login.dll
+/obj/Debug/net8.0/login.pdb
+/obj/Debug/net8.0/login.sourcelink.json
