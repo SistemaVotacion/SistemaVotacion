@@ -4,5 +4,7 @@
 
 /.vs
 /bin
-/obj/Debug/
-/obj/Debug/net8.0/login.GeneratedMSBuildEditorConfig.editorconfig
+/obj
+/obj/login.csproj.nuget.dgspec.json
+/obj/login.csproj.nuget.g.props
+/obj/project.assets.json
