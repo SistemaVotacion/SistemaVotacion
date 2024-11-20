@@ -20,13 +20,19 @@ namespace login.Controllers
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-
+        private static readonly List<User> Users = new List<User>();
 
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
+            
+            ConexionDB baseDeDatos = new ConexionDB();
+            baseDeDatos.ObtenerDatos();
 
-            if (ObtenerDatos != null)
+
+            var user = Users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password)
+
+            if (user != null)
             {
                 return Ok(new { message = "Login successful!" });
             }
@@ -47,12 +53,12 @@ namespace login.Controllers
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=Hotel_otaku;Integrated Security=True";
+            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
 
 
 
             // Método para obtener todas las reservas existentes
-            internal DataSet ObtenerDatos()
+            internal DataSet ObtenerDatos(string contraseniaVer, string usuarioVer)
             {
                 DataSet datos = new DataSet();
                 try
