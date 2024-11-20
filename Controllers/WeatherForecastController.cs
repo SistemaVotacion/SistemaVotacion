@@ -7,6 +7,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 /*
  * Carrasco, Nathan
@@ -21,12 +22,19 @@ namespace login.Controllers
     public class LoginController : ControllerBase
     {
 
-
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
+            
+            ConexionDB baseDeDatos = new ConexionDB();
+            user = baseDeDatos.ObtenerDatos(request.Password, request.Username);
 
-            if (ObtenerDatos != null)
+
+
+
+            var user = Users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+
+            if (user != null)
             {
                 return Ok(new { message = "Login successful!" });
             }
@@ -47,23 +55,32 @@ namespace login.Controllers
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=Hotel_otaku;Integrated Security=True";
+            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
 
-
+            private static readonly List<User> Users = new List<User>();
 
             // Método para obtener todas las reservas existentes
-            internal DataSet ObtenerDatos()
+            internal DataSet ObtenerDatos(string contraseniaVer, string usuarioVer)
             {
                 DataSet datos = new DataSet();
                 try
                 {
-                    using (SqlConnection conexion = new SqlConnection(detallesConexion))
-                    {
+                    using (SqlConnection conexion = new SqlConnection(detallesConexion)) { 
+                    
 
-                        string query = "SELECT id_reserva, nombre, habitacion, fecha_entrada, fecha_salida," +
-                            " monto_total FROM [Hotel_otaku].[dbo].[Reservas]";
-                        SqlDataAdapter adaptador = new SqlDataAdapter(query, conexion);
-                        adaptador.Fill(datos, "Reservas");
+                        SqlCommand command = new SqlCommand("CrearReserva", conexion);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros del procedimiento
+                        command.Parameters.AddWithValue("@contrasenia", contraseniaVer);
+                        command.Parameters.AddWithValue("@usuario", usuarioVer);
+                    command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+
+
+
+                    // Abrir la conexión y ejecutar el procedimiento almacenado
+                    connection.Open();
 
                     }
                 }
