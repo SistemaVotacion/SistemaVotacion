@@ -1,6 +1,5 @@
 using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Data.SqlClient;
 using System.Data;
 using System;
 using System.Collections.Generic;
@@ -21,12 +20,12 @@ namespace login.Controllers
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-        
+
 
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-    
+
             if (ObtenerDatos != null)
             {
                 return Ok(new { message = "Login successful!" });
@@ -50,7 +49,7 @@ namespace login.Controllers
         {
             private string detallesConexion = "Data Source=localhost;Initial Catalog=Hotel_otaku;Integrated Security=True";
 
-           
+
 
             // Método para obtener todas las reservas existentes
             internal DataSet ObtenerDatos()
@@ -60,12 +59,12 @@ namespace login.Controllers
                 {
                     using (SqlConnection conexion = new SqlConnection(detallesConexion))
                     {
-                        
-                                string query = "SELECT id_reserva, nombre, habitacion, fecha_entrada, fecha_salida," +
-                                    " monto_total FROM [Hotel_otaku].[dbo].[Reservas]";
-                                SqlDataAdapter adaptador = new SqlDataAdapter(query, conexion);
-                                adaptador.Fill(datos, "Reservas");
-                            
+
+                        string query = "SELECT id_reserva, nombre, habitacion, fecha_entrada, fecha_salida," +
+                            " monto_total FROM [Hotel_otaku].[dbo].[Reservas]";
+                        SqlDataAdapter adaptador = new SqlDataAdapter(query, conexion);
+                        adaptador.Fill(datos, "Reservas");
+
                     }
                 }
                 catch (SqlException ex)
@@ -75,7 +74,7 @@ namespace login.Controllers
                 return datos;
             }
         }
-    
+
 
 
     }

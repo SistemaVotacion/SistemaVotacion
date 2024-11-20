@@ -1,0 +1,151 @@
+<style>
+.header-nav {
+  background-color: rgb(48, 84, 121);
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  padding: 8px 40px 17px 14px;
+}
+
+.logo {
+  aspect-ratio: 1.2;
+  object-fit: contain;
+  object-position: center;
+  width: 24px;
+}
+
+.nav-container {
+  align-self: end;
+  display: flex;
+  width: 1151px;
+  max-width: 100%;
+  gap: 20px;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: start;
+  gap: 40px 59px;
+  color: rgb(255, 255, 255);
+  flex-wrap: wrap;
+  font: 300 24px Inter, sans-serif;
+}
+
+.nav-item {
+  flex-basis: auto;
+}
+
+.vote-section {
+  display: flex;
+  gap: 19px;
+}
+
+.stats-link {
+  align-self: start;
+  flex-grow: 1;
+}
+
+.vote-wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.vote-link {
+  align-self: center;
+}
+
+.vote-indicator {
+  background-color: rgb(0, 0, 0);
+  margin-top: 11px;
+  height: 3px;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+.social-links {
+  align-self: start;
+  display: flex;
+  margin-top: 4px;
+  gap: 17px;
+}
+
+.social-icon {
+  aspect-ratio: 1.25;
+  object-fit: contain;
+  object-position: center;
+  width: 25px;
+}
+
+.redirect-message {
+  width: 636px;
+  background-color: rgb(48, 84, 121);
+  align-self: center;
+  margin-top: 439px;
+  max-width: 100%;
+  color: rgb(255, 255, 255);
+  padding: 98px 70px;
+  font: 400 20px Inter, sans-serif;
+}
+
+.footer-credits {
+  background-color: rgb(48, 84, 121);
+  margin-top: 439px;
+  color: rgb(255, 255, 255);
+  padding: 53px 70px;
+  font: 300 24px Inter, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .header-nav {
+    max-width: 100%;
+    padding-right: 20px;
+  }
+  
+  .nav-links {
+    max-width: 100%;
+  }
+  
+  .redirect-message {
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+  
+  .footer-credits {
+    max-width: 100%;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+</style>
+
+<header class="header-nav">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/87b27aaaeb6cae637f2e56ce67270c111f1632cf4f112cf0e2ed1efdaeda0d64?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="logo" />
+  <nav class="nav-container">
+    <div class="nav-links">
+      <a href="#" class="nav-item">Inicio</a>
+      <a href="#" class="nav-item">Sobre nosotros</a>
+      <div class="vote-section">
+        <a href="#" class="stats-link">Estadisticas</a>
+        <div class="vote-wrapper">
+          <a href="#" class="vote-link">Vota aqui</a>
+          <div class="vote-indicator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="social-links">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+    </div>
+  </nav>
+</header>
+
+<main>
+  <p class="redirect-message">
+    En unos segundos sera redirigido a la papeleta de votación. Gracias
+  </p>
+</main>
+
+<footer class="footer-credits">
+  Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+</footer>
