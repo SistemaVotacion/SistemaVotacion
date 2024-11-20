@@ -9,12 +9,17 @@ using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 using System.Security.Cryptography;
+using System.Collections;
+using System.Numerics;
+using System.Text.Json;
 
 /*
  * Carrasco, Nathan
  * Herrera, Francisco
  * Wu, Iván
  */
+
+// este archivo es un api para login con contrasenia (cedula) y codigo en la parte de la cedula (?)
 
 namespace login.Controllers
 {
@@ -23,20 +28,25 @@ namespace login.Controllers
     public class LoginController : ControllerBase
     {
 
-        [HttpPost]
-        public IActionResult Login([FromBody] LoginRequest request)
+        [HttpPost] 
+        public IActionResult Login([FromBody] LoginRequest request) // se ejecuta cuando el usuario manda datos por el api
         {
-
             ConexionDB baseDeDatos = new ConexionDB();
 
-            byte[] data = new byte[DATA_SIZE];
-            byte[] result;
+            //algoritmo de hashing criptografico
+            byte[] data = Encoding.UTF8.GetBytes(request.Password); // Conveierte contrasenia (cedula) a bytes para hashing
+            byte[] result; //resultado de hashing en bytes
+            string resultadoBase54;
 
             using (SHA512 sha512 = SHA512.Create())
             {
                 result = sha512.ComputeHash(data);
             }
 
+            resultadoBase54 = System.Convert.ToBase64String(result); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
+
+
+            //el metorod retorna una lista
             var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Username);
 
 
@@ -70,7 +80,7 @@ namespace login.Controllers
             private static readonly List<UserAuth> Users = new List<UserAuth>();
 
             // Método para obtener todas las reservas existentes
-            internal List<UserAuth> ObtenerDatos(string contraseniaVer, string usuarioVer)
+            internal List<UserAuth> ObtenerDatos(string contraseniaVer, string usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
             {
                 try
                 {
@@ -96,7 +106,7 @@ namespace login.Controllers
                         {
                             Users.Add(new UserAuth()
                             {
-                                Username = (string)reader[0],
+                                Username = (string)reader[0], //username y password estan especificados en la clase UserAuth
                                 Password = (string)reader[1],
                             });
                         }
