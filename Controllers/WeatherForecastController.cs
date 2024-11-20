@@ -75,8 +75,8 @@ namespace login.Controllers
 
         public class UserAuth // para uso interno del progrma, como guardar datos
         {
-            public Byte[] Username { get; set; }
-            public Byte[] Password { get; set; }
+            public byte[] Username { get; set; }
+            public byte[] Password { get; set; }
 
         }
 
@@ -110,8 +110,8 @@ namespace login.Controllers
                         {
                             Users.Add(new UserAuth()
                             {
-                                Username = (Byte[])reader[0], //username y password estan especificados en la clase UserAuth
-                                Password = (Byte[])reader[1],
+                                Username = (byte[])reader[0], //username y password estan especificados en la clase UserAuth
+                                Password = (byte[])reader[1],
                             });
                         }
                         reader.Close();
