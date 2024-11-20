@@ -47,7 +47,7 @@ namespace login.Controllers
             public string Password { get; set; }
         }
 
-        public class User
+        public class UserAuth
         {
             public string Username { get; set; }
             public string Password { get; set; }
@@ -85,7 +85,7 @@ namespace login.Controllers
 
                         while (reader.Read())
                         {
-                            Users.Add(new User()
+                            Users.Add(new UserAuth()
                             {
                                 UserID = (int)reader[0],
                                 FirstName = (string)reader[1],
