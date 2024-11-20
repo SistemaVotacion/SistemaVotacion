@@ -52,12 +52,12 @@ namespace login.Controllers
 
 
 
-            var user = usuarioLogin.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+            var user = usuarioLogin.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password); // verificar usuario
 
             if (user != null)
             {
-                return Ok(new { message = "Login successful!" });
-            }
+                return Ok(new { message = "https://localhost/"}); //aqui poner URL 
+            } 
             return Unauthorized(new { message = "Invalid username or password." });
         }
 
