@@ -33,11 +33,12 @@ namespace login.Controllers
         {
             ConexionDB baseDeDatos = new ConexionDB();
 
-            //algoritmo de hashing criptografico
+            //para hacer hasing criptografico para que no se puedan facilmente deducir cedulas desde el sistema
             byte[] data = Encoding.UTF8.GetBytes(request.Password); // Conveierte contrasenia (cedula) a bytes para hashing
             byte[] result; //resultado de hashing en bytes
             string resultadoBase54;
 
+            //algoritmo de hashing criptografico
             using (SHA512 sha512 = SHA512.Create())
             {
                 result = sha512.ComputeHash(data);
