@@ -27,12 +27,12 @@ namespace login.Controllers
         {
             
             ConexionDB baseDeDatos = new ConexionDB();
-            user = baseDeDatos.ObtenerDatos(request.Password, request.Username);
+            var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Username);
 
 
 
 
-            var user = Users.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
+            var user = usuarioLogin.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password);
 
             if (user != null)
             {
@@ -47,7 +47,7 @@ namespace login.Controllers
             public string Password { get; set; }
         }
 
-        public class User
+        public class UserAuth
         {
             public string Username { get; set; }
             public string Password { get; set; }
@@ -57,12 +57,11 @@ namespace login.Controllers
         {
             private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
 
-            private static readonly List<User> Users = new List<User>();
+            private static readonly List<UserAuth> Users = new List<UserAuth>();
 
             // Método para obtener todas las reservas existentes
-            internal DataSet ObtenerDatos(string contraseniaVer, string usuarioVer)
+            internal List<UserAuth> ObtenerDatos(string contraseniaVer, string usuarioVer)
             {
-                DataSet datos = new DataSet();
                 try
                 {
                     using (SqlConnection conexion = new SqlConnection(detallesConexion)) { 
@@ -74,13 +73,24 @@ namespace login.Controllers
                         // Agregar los parámetros del procedimiento
                         command.Parameters.AddWithValue("@contrasenia", contraseniaVer);
                         command.Parameters.AddWithValue("@usuario", usuarioVer);
-                    command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                        command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
 
 
 
-                    // Abrir la conexión y ejecutar el procedimiento almacenado
-                    connection.Open();
+                        // Abrir la conexión y ejecutar el procedimiento almacenado
+                        command.Connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            Users.Add(new UserAuth()
+                            {
+                                Username = (string)reader[0],
+                                Password = (string)reader[1],
+                            });
+                        }
+                        reader.Close();
 
                     }
                 }
@@ -88,7 +98,7 @@ namespace login.Controllers
                 {
                     throw new Exception("Error al obtener libros: " + ex.Message);
                 }
-                return datos;
+                return Users;
             }
         }
 
