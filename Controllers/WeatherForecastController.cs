@@ -8,6 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Security.Cryptography;
 
 /*
  * Carrasco, Nathan
@@ -25,8 +26,17 @@ namespace login.Controllers
         [HttpPost]
         public IActionResult Login([FromBody] LoginRequest request)
         {
-            
+
             ConexionDB baseDeDatos = new ConexionDB();
+
+            byte[] data = new byte[DATA_SIZE];
+            byte[] result;
+
+            using (SHA512 sha512 = SHA512.Create())
+            {
+                result = sha512.ComputeHash(data);
+            }
+
             var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Username);
 
 
