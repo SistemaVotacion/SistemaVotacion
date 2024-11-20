@@ -9,3 +9,5 @@
 /obj/login.csproj.nuget.g.props
 /obj/project.assets.json
 /obj/Debug/net8.0/login.csproj.CoreCompileInputs.cache
+obj/Debug/net8.0/login.AssemblyInfo.cs
+obj/Debug/net8.0/login.AssemblyInfoInputs.cache

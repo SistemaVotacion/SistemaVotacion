@@ -57,7 +57,7 @@ namespace login.Controllers
 
             if (user != null)
             {
-                return Ok(new { message = "https://localhost/"}); //aqui poner URL:  "https://localhost/ + provincia + "+" + hashEnBase64"
+                return Ok(new { message = "https://localhost/"}); //aqui poner URL:  "https://localhost/ + provincia + "-" + hashEnBase64"
             } 
             return Unauthorized(new { message = "Invalid username or password." });
         }
