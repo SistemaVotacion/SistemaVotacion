@@ -57,7 +57,7 @@ namespace login.Controllers
         {
             private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
 
-            private static readonly List<User> Users = new List<User>();
+            private static readonly List<UserAuth> Users = new List<UserAuth>();
 
             // Método para obtener todas las reservas existentes
             internal DataSet ObtenerDatos(string contraseniaVer, string usuarioVer)
@@ -74,13 +74,24 @@ namespace login.Controllers
                         // Agregar los parámetros del procedimiento
                         command.Parameters.AddWithValue("@contrasenia", contraseniaVer);
                         command.Parameters.AddWithValue("@usuario", usuarioVer);
-                    command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                        command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
 
 
 
-                    // Abrir la conexión y ejecutar el procedimiento almacenado
-                    connection.Open();
+                        // Abrir la conexión y ejecutar el procedimiento almacenado
+                        command.Connection.Open();
+                        SqlDataReader reader = command.ExecuteReader();
+
+                        while (reader.Read())
+                        {
+                            Users.Add(new User()
+                            {
+                                UserID = (int)reader[0],
+                                FirstName = (string)reader[1],
+                            });
+                        }
+                        reader.Close();
 
                     }
                 }
