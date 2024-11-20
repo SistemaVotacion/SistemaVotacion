@@ -51,7 +51,7 @@ namespace login.Controllers
             var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Username);
 
 
-
+            //falta concatenar la cedula y el dato en la parte de atras de la cedula
 
             var user = usuarioLogin.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password); // verificar usuario
 
