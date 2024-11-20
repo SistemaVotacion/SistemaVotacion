@@ -1,0 +1,178 @@
+<style>
+.header-nav {
+  background-color: rgb(48, 84, 121);
+  padding: 8px 40px 17px 14px;
+  width: 100%;
+}
+
+.logo {
+  aspect-ratio: 1.2;
+  object-fit: contain;
+  width: 24px;
+}
+
+.nav-container {
+  align-self: end;
+  display: flex;
+  width: 1151px;
+  max-width: 100%;
+  gap: 20px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+.nav-links {
+  display: flex;
+  align-items: start;
+  gap: 40px 59px;
+  color: rgb(255, 255, 255);
+  flex-wrap: wrap;
+  font: 300 24px Inter, sans-serif;
+}
+
+.nav-item {
+  flex-basis: auto;
+}
+
+.vote-section {
+  display: flex;
+  gap: 19px;
+}
+
+.vote-link {
+  align-self: center;
+}
+
+.active-indicator {
+  background-color: rgb(0, 0, 0);
+  margin-top: 11px;
+  height: 3px;
+  border: 3px solid rgb(0, 0, 0);
+}
+
+.social-links {
+  align-self: start;
+  display: flex;
+  margin-top: 4px;
+  gap: 17px;
+}
+
+.social-icon {
+  aspect-ratio: 1.25;
+  object-fit: contain;
+  width: 25px;
+}
+
+.confirmation-container {
+  background-color: rgb(48, 84, 121);
+  align-self: center;
+  margin-top: 312px;
+  width: 1105px;
+  max-width: 100%;
+  padding: 39px 43px 126px 21px;
+  color: rgb(255, 255, 255);
+  font-family: Inter, sans-serif;
+}
+
+.confirmation-title {
+  font-size: 64px;
+  font-weight: 400;
+}
+
+.confirmation-message {
+  font-size: 20px;
+  align-self: center;
+  margin: 54px 0 -25px;
+}
+
+.emphasis-text {
+  font-size: 40px;
+}
+
+.footer {
+  background-color: rgb(48, 84, 121);
+  margin-top: 425px;
+  padding: 53px 70px;
+  color: rgb(255, 255, 255);
+  font: 300 24px Inter, sans-serif;
+}
+
+@media (max-width: 991px) {
+  .header-nav {
+    max-width: 100%;
+    margin-right: 4px;
+    padding-right: 20px;
+  }
+  
+  .nav-links {
+    max-width: 100%;
+  }
+  
+  .confirmation-container {
+    margin-top: 40px;
+    padding: 0 20px 100px;
+  }
+  
+  .confirmation-title {
+    max-width: 100%;
+    font-size: 40px;
+  }
+  
+  .confirmation-message {
+    max-width: 100%;
+    margin: 40px 0 10px;
+  }
+  
+  .footer {
+    max-width: 100%;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+</style>
+
+<header class="header-nav">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/87b27aaaeb6cae637f2e56ce67270c111f1632cf4f112cf0e2ed1efdaeda0d64?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="logo" />
+  <nav class="nav-container">
+    <ul class="nav-links">
+      <li class="nav-item">Inicio</li>
+      <li class="nav-item">Sobre nosotros</li>
+      <li class="vote-section">
+        <span class="nav-item">Estadisticas</span>
+        <div>
+          <span class="vote-link">Vota aqui</span>
+          <div class="active-indicator"></div>
+        </div>
+      </li>
+    </ul>
+    <div class="social-links">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+    </div>
+  </nav>
+</header>
+
+<main class="confirmation-container">
+  <h1 class="confirmation-title">Su voto se ha registrado con exito.</h1>
+  <p class="confirmation-message">
+    <span class="emphasis-text">Gracias por ejercer el sufragio.</span>
+    <br /><br />
+    En unos segundos sera redirigido a la pagina de inicio. Gracias por decidir el futuro de la Nación.
+  </p>
+</main>
+
+<footer class="footer">
+  Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+</footer>
