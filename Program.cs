@@ -24,7 +24,7 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-app.UseStaticFiles();    //Serve files from wwwroot
+app.UseStaticFiles();    //Serve files from wwwroot configurar servidor web para dar archivos estaticos
 app.UseStaticFiles(new StaticFileOptions
 {
     FileProvider = new PhysicalFileProvider(
