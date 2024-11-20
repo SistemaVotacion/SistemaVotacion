@@ -1,0 +1,102 @@
+<style>
+.header-nav { background-color: rgba(48, 84, 121, 1); display: flex; width: 100%; flex-direction: column; padding: 8px 40px 16px 14px; }
+.logo { aspect-ratio: 1.2; object-fit: contain; object-position: center; width: 24px; }
+.nav-container { align-self: end; display: flex; width: 1151px; max-width: 100%; gap: 20px; justify-content: space-between; }
+.nav-links { display: flex; align-items: start; gap: 40px 58px; color: #fff; flex-wrap: wrap; font: 300 24px Inter, sans-serif; }
+.nav-home { flex-grow: 1; }
+.nav-about { align-self: stretch; display: flex; flex-direction: column; }
+.underline { margin-top: 19px; width: 165px; height: 3px; border: 3px solid #fff; }
+.nav-stats-vote { display: flex; gap: 34px; }
+.social-icons { align-self: start; display: flex; margin-top: 4px; gap: 17px; }
+.social-icon { aspect-ratio: 1.25; object-fit: contain; object-position: center; width: 25px; }
+.candidates-section { align-self: center; width: 100%; max-width: 1493px; margin: 50px 0 0 15px; }
+.candidates-grid { gap: 20px; display: flex; }
+.candidate-card { display: flex; flex-direction: column; color: #000; white-space: nowrap; padding: 3px 0; font: 300 24px Inter, sans-serif; }
+.candidate-photo { background-color: rgba(217, 217, 217, 1); height: 309px; }
+.candidate-info { margin: 37px 0 0 21px; }
+.voting-lines { align-self: center; display: flex; width: 100%; max-width: 1466px; align-items: flex-start; gap: 20px; color: #000; white-space: nowrap; justify-content: space-between; margin: 73px 0 0 24px; font: 300 24px Inter, sans-serif; }
+.voting-line { z-index: 10; padding: -15px 0 15px; }
+.footer { background-color: rgba(48, 84, 121, 1); margin-top: 360px; width: 100%; color: #fff; padding: 53px 70px; font: 300 24px Inter, sans-serif; }
+
+@media (max-width: 991px) {
+  .header-nav { max-width: 100%; padding-right: 20px; }
+  .nav-links { max-width: 100%; }
+  .candidates-section { max-width: 100%; margin-top: 40px; }
+  .candidates-grid { flex-direction: column; align-items: stretch; gap: 0; }
+  .candidate-card { margin-top: 40px; white-space: initial; }
+  .candidate-info { margin: 40px 7px 0 10px; }
+  .voting-lines { max-width: 100%; margin-top: 40px; white-space: initial; }
+  .voting-line { white-space: initial; }
+  .footer { max-width: 100%; margin-top: 40px; padding: 0 20px; }
+}
+</style>
+
+<header class="header-nav">
+  <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1dcb170e5549162d97f8e7d4eff62fa1fb956f24239444ac5987544317c029e?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="Company Logo" class="logo" />
+  <nav class="nav-container">
+    <div class="nav-links">
+      <a href="#" class="nav-home">Inicio</a>
+      <div class="nav-about">
+        <a href="#">Sobre nosotros</a>
+        <div class="underline"></div>
+      </div>
+      <div class="nav-stats-vote">
+        <a href="#">Estadisticas</a>
+        <a href="#">Vota aqui</a>
+      </div>
+    </div>
+    <div class="social-icons">
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="Social Media Icon" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="Social Media Icon" class="social-icon" />
+      <img src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="Social Media Icon" class="social-icon" />
+    </div>
+  </nav>
+</header>
+
+<section class="candidates-section">
+  <div class="candidates-grid">
+    <article class="candidate-card">
+      <div class="candidate-photo" role="img" aria-label="Candidate Photo"></div>
+      <p class="candidate-info">
+        Nombre:---------------<br />
+        Cédula:----------<br />
+        Carrera:
+      </p>
+    </article>
+    <article class="candidate-card">
+      <div class="candidate-photo" role="img" aria-label="Candidate Photo"></div>
+      <p class="candidate-info">
+        Nombre:---------------<br />
+        Cédula:----------<br />
+        Carrera:
+      </p>
+    </article>
+    <article class="candidate-card">
+      <div class="candidate-photo" role="img" aria-label="Candidate Photo"></div>
+      <p class="candidate-info">
+        Nombre:---------------<br />
+        Cédula:----------<br />
+        Carrera:
+      </p>
+    </article>
+    <article class="candidate-card">
+      <div class="candidate-photo" role="img" aria-label="Candidate Photo"></div>
+      <p class="candidate-info">
+        Nombre:---------------<br />
+        Cédula:----------<br />
+        Carrera:
+      </p>
+    </article>
+  </div>
+</section>
+
+<section class="voting-lines">
+  <p class="voting-line">------------------------------------------------------------------------------------------------</p>
+  <p class="voting-line">------------------------------------------------------------------------------------------------</p>
+  <p class="voting-line">------------------------------------------------------------------------------------------------</p>
+  <p class="voting-line">------------------------------------------------------------------------------------------------</p>
+</section>
+
+<footer class="footer">
+  Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+</footer>

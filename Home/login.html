@@ -1,0 +1,134 @@
+<style>
+.login-container { 
+  background-color: #fff; display: flex; flex-direction: column; overflow: hidden; }
+.header { background-color: #305479; display: flex; width: 100%; flex-direction: column; padding: 8px 40px 17px 14px; }
+@media (max-width: 991px) { .header { max-width: 100%; padding-right: 20px; } }
+.logo { aspect-ratio: 1.2; object-fit: contain; object-position: center; width: 24px; }
+.nav-wrapper { align-self: end; display: flex; width: 1151px; max-width: 100%; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
+.nav-links { display: flex; align-items: start; gap: 40px 59px; color: #fff; flex-wrap: wrap; font: 300 24px Inter, sans-serif; }
+@media (max-width: 991px) { .nav-links { max-width: 100%; } }
+.about-link { flex-basis: auto; }
+.stats-wrapper { display: flex; gap: 19px; }
+.stats-link { align-self: start; flex-grow: 1; }
+.vote-container { display: flex; flex-direction: column; }
+.vote-link { align-self: center; }
+.vote-indicator { background-color: #000; margin-top: 11px; height: 3px; border: 3px solid #fff; }
+.social-links { align-self: start; display: flex; margin-top: 4px; gap: 17px; }
+.social-icon { aspect-ratio: 1.25; object-fit: contain; object-position: center; width: 25px; }
+.login-form-container { background-color: #305479; align-self: center; display: flex; margin-top: 238px; width: 609px; max-width: 100%; flex-direction: column; align-items: center; color: #fff; padding: 12px 80px 44px; font: 400 20px Inter, sans-serif; }
+@media (max-width: 991px) { .login-form-container { margin-top: 40px; padding: 0 20px; } }
+.login-form { display: flex; width: 359px; max-width: 100%; flex-direction: column; }
+.greeting { font-size: 64px; }
+@media (max-width: 991px) { .greeting { font-size: 40px; } }
+.instructions { 
+  margin: 46px 21px 0 26px; 
+}
+
+@media (max-width: 991px) { 
+  .instructions { 
+  margin: 40px 10px 0; 
+  } 
+}
+
+.input-label { 
+  align-self: start; margin: 34px 0 0 26px; 
+}
+
+@media (max-width: 991px) { 
+  .input-label { 
+    margin-left: 10px; 
+  } 
+}
+.cedula-input { 
+  background-color: #fff; 
+  align-self: center;
+   display: flex; 
+   margin-top: 14px; 
+   width: 289px; 
+   max-width: 100%; 
+   height: 46px;
+   }
+
+.submit-button { 
+  border-radius: 59px; 
+  background-color: #fff; 
+  align-self: center; 
+  margin-top: 34px; 
+  width: 289px; 
+  max-width: 100%; 
+  color: #000; 
+  text-align: center; 
+  padding: 23px 36px;
+ }
+
+@media (max-width: 991px) { 
+  .submit-button { 
+    padding: 0 20px; 
+  } 
+}
+
+.footer { 
+  background-color: #305479; 
+  margin-top: 216px; 
+  color: #fff; 
+  padding: 53px 70px;
+   font: 300 24px Inter, sans-serif; 
+  }
+
+@media (max-width: 991px) { 
+  .footer { 
+    max-width: 100%; margin-top: 40px; padding: 0 20px; 
+  } 
+}
+
+.visually-hidden { 
+  position: absolute; 
+  width: 1px; 
+  height: 1px; 
+  padding: 0; 
+  margin: -1px; 
+  overflow: hidden; 
+  clip: rect(0,0,0,0); 
+  border: 0; 
+  }
+</style>
+
+<header class="header">
+  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1dcb170e5549162d97f8e7d4eff62fa1fb956f24239444ac5987544317c029e?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="logo" />
+  <nav class="nav-wrapper">
+    <div class="nav-links">
+      <a href="#" class="home-link">Inicio</a>
+      <a href="#" class="about-link">Sobre nosotros</a>
+      <div class="stats-wrapper">
+        <a href="#" class="stats-link">Estadisticas</a>
+        <div class="vote-container">
+          <a href="#" class="vote-link">Vota aqui</a>
+          <div class="vote-indicator"></div>
+        </div>
+      </div>
+    </div>
+    <div class="social-links">
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+    </div>
+  </nav>
+</header>
+
+<main class="login-form-container">
+  <form class="login-form">
+    <h1 class="greeting">Buenos dias</h1>
+    <p class="instructions">
+      Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
+      Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
+      Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
+    </p>
+    <label for="cedula" class="input-label">Cédula:</label>
+    <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
+    <button type="submit" class="submit-button">Aceptar</button>
+  </form>
+</main>
+
+<footer class="footer">
+  Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+</footer>
