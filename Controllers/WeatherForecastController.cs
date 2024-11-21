@@ -21,6 +21,8 @@ using System.Text.Json;
 
 // este archivo es un api para login con contrasenia (cedula) y codigo en la parte de la cedula (?)
 
+//falta mientras la votación esta en progreso el número de votos por candidato
+//podría ser 0 si la base de datos no se puede acceder por estar bloqueada durante la votación 
 namespace login.Controllers
 {
     [ApiController]
