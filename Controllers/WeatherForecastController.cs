@@ -27,6 +27,8 @@ using System.Text.Json;
 //tuplas en listas en c#
 //confiar en certificado base de datos
 // bytes en hexadecimal en string en vez de base64 para simplicidad 
+//mover archivos en servidor para renombrar papeletas y darlas
+// API para registrar el voto
 namespace login.Controllers
 {
     [ApiController]
