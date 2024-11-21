@@ -4,7 +4,6 @@
 
 **/.vs
 **/bin
-**/obj
 /obj/login.csproj.nuget.dgspec.json
 /obj/login.csproj.nuget.g.props
 /obj/project.assets.json
