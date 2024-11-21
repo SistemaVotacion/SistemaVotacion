@@ -17,7 +17,7 @@ falta
 
 // hacer javascript de login, papeleta
 
-// hacer variante para desarrollo 5 que solo valide la cédula pero no la revisa con bd
+// hacer variante para desarrollo 5 que solo valide la cédula y el código de la cédula pero no la revisa con bd
 
 // hacer trabajo escrito
 
