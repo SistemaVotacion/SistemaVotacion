@@ -23,6 +23,10 @@ using System.Text.Json;
 
 //falta mientras la votación esta en progreso el número de votos por candidato
 //podría ser 0 si la base de datos no se puede acceder por estar bloqueada durante la votación 
+
+//tuplas en listas en c#
+//confiar en certificado base de datos
+// bytes en hexadecimal en string en vez de base64 para simplicidad 
 namespace login.Controllers
 {
     [ApiController]
