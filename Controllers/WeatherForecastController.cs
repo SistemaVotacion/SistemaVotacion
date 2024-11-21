@@ -82,7 +82,8 @@ namespace login.Controllers
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
+            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True;TrustServerCertificate=True";
+
 
             private static readonly List<UserAuth> Users = new List<UserAuth>();
 
