@@ -99,8 +99,7 @@
         font: 300 24px Inter, sans-serif; 
       }
 
-      .about-link { flex-basis: auto; 
-      }
+     
 
       .stats-wrapper { display: flex; 
         gap: 19px; 
@@ -214,6 +213,50 @@
         align-self: stretch;
       }
 
+      .confirmation-message {
+    width: 636px;
+    background-color: #305479;
+    align-self: center;
+    margin-top: 439px;
+    max-width: 100%;
+    color: #fff;
+    padding: 106px 70px 83px;
+    font: 400 20px Inter, sans-serif;
+  }
+
+  .error-container {
+    background-color: #305479;
+    align-self: center;
+    display: flex;
+    margin-top: 439px;
+    width: 636px;
+    max-width: 100%;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 96px 80px;
+    font: 400 20px Inter, sans-serif;
+  }
+  .error-content {
+    display: flex;
+    width: 324px;
+    max-width: 100%;
+    flex-direction: column;
+  }
+  .error-message {
+    color: #fff;
+  }
+  .return-button {
+    border-radius: 59px;
+    background-color: #fff;
+    color: #000;
+    white-space: nowrap;
+    text-align: center;
+    margin: 53px 18px 0 17px;
+    padding: 23px 32px;
+    cursor: pointer;
+  }
+
       .redirect-message {
         width: 636px;
         background-color: rgb(48, 84, 121);
@@ -289,6 +332,21 @@
         <input type="text" id="verification-code" class="code-input" aria-label="Ingrese código de verificación" />
         <button type="submit" class="submit-button">Aceptar</button>
       </form>
+    </main>
+
+    <section class="confirmation-message">
+      <p>
+        Estimado ciudadano: nuestros registros muestan que usted ha votado. Gracias por ejercer el sufragio.
+        <br /><br />
+        En unos segundos sera redirigido a la pagina de inicio. Gracias.
+      </p>
+    </section>
+
+    <main class="error-container">
+      <section class="error-content">
+        <p class="error-message">Su cedula no se ha encontrado en el sistema. Puede regresar a revisarla e intentar de nuevo.</p>
+        <button class="return-button" tabindex="0">Regresar</button>
+      </section>
     </main>
 
     <main>
