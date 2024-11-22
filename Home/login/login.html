@@ -13,13 +13,6 @@
   padding: 8px 40px 17px 14px;
 }
 
-@media (max-width: 991px) { 
-  .header { 
-  max-width: 100%; 
-  padding-right: 20px; 
-  } 
-}
-
 .logo { aspect-ratio: 1.2; 
   object-fit: contain; 
   object-position: center; 
@@ -41,12 +34,6 @@
   color: #fff; 
   flex-wrap: wrap; 
   font: 300 24px Inter, sans-serif; 
-}
-
-@media (max-width: 991px) { 
-  .nav-links {
-   max-width: 100%; 
-  } 
 }
 
 .about-link { flex-basis: auto; 
@@ -98,12 +85,6 @@
    font: 400 20px Inter, sans-serif; 
   }
 
-@media (max-width: 991px) { 
-  .login-form-container { 
-  margin-top: 40px; padding: 0 20px; 
-  } 
-}
-
 .login-form { 
   display: flex; width: 359px; max-width: 100%; flex-direction: column; 
 }
@@ -112,29 +93,14 @@
   font-size: 64px; 
 }
 
-@media (max-width: 991px) { 
-  .greeting { font-size: 40px;
- } 
-}
 .instructions { 
   margin: 46px 21px 0 26px; 
-}
-
-@media (max-width: 991px) { 
-  .instructions { 
-  margin: 40px 10px 0; 
-  } 
 }
 
 .input-label { 
   align-self: start; margin: 34px 0 0 26px; 
 }
 
-@media (max-width: 991px) { 
-  .input-label { 
-    margin-left: 10px; 
-  } 
-}
 .cedula-input { 
   background-color: #fff; 
   align-self: center;
@@ -157,10 +123,43 @@
   padding: 23px 36px;
  }
 
-@media (max-width: 991px) { 
-  .submit-button { 
-    padding: 0 20px; 
-  } 
+ .verification-container {
+  background-color: rgb(48, 84, 121);
+  align-self: center;
+  display: flex;
+  margin-top: 355px;
+  width: 636px;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: center;
+  color: rgb(255, 255, 255);
+  justify-content: center;
+  padding: 36px 80px;
+  font: 400 20px Inter, sans-serif;
+}
+
+.verification-form {
+  display: flex;
+  margin-left: 15px;
+  width: 324px;
+  max-width: 100%;
+  flex-direction: column;
+  align-items: start;
+}
+
+.verification-text {
+  align-self: stretch;
+}
+
+.redirect-message {
+  width: 636px;
+  background-color: rgb(48, 84, 121);
+  align-self: center;
+  margin-top: 439px;
+  max-width: 100%;
+  color: rgb(255, 255, 255);
+  padding: 98px 70px;
+  font: 400 20px Inter, sans-serif;
 }
 
 .footer { 
@@ -170,12 +169,6 @@
   padding: 53px 70px;
    font: 300 24px Inter, sans-serif; 
   }
-
-@media (max-width: 991px) { 
-  .footer { 
-    max-width: 100%; margin-top: 40px; padding: 0 20px; 
-  } 
-}
 
 .visually-hidden { 
   position: absolute; 
@@ -223,6 +216,21 @@
     <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
     <button type="submit" class="submit-button">Aceptar</button>
   </form>
+</main>
+
+<main class="verification-container">
+  <form class="verification-form">
+    <p class="verification-text">Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras "NI".</p>
+    <label for="verification-code" class="code-label">Código:</label>
+    <input type="text" id="verification-code" class="code-input" aria-label="Ingrese código de verificación" />
+    <button type="submit" class="submit-button">Aceptar</button>
+  </form>
+</main>
+
+<main>
+  <p class="redirect-message">
+    En unos segundos sera redirigido a la papeleta de votación. Gracias
+  </p>
 </main>
 
 <footer class="footer">
