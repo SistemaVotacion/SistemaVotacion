@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
     <style>
       .login-container { 
         background-color: #fff; 
@@ -9,130 +10,6 @@
         overflow: hidden; 
       }
 
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 0;
-        background-color: #f4f4f9;
-        color: #333;
-      }
-
-      header {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        background-color: #003366;
-        color: white;
-        padding: 0.5rem 2rem;
-        position: fixed;
-        top: 0;
-        width: 97%;
-        z-index: 1000;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-      }
-
-      .header-left img {
-            height: 50px;
-      }
-
-      .header-center {
-          display: flex;
-          align-items: center;
-          gap: 2rem; /* Separación entre elementos del menú */
-      }
-
-      nav a {
-          color: white;
-          text-decoration: none;
-          font-size: 1rem;
-          font-weight: bold;
-          margin: 0 1rem; /* Espaciado adicional entre los enlaces */
-      }
-
-      nav a:hover {
-          text-decoration: underline;
-      }
-
-      .search-icon {
-          width: 30px;
-          height: 30px;
-          background-color: #ccc;
-          border-radius: 50%;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-      }
-
-      .header-right {
-          display: flex;
-          gap: 1rem;
-      }
-
-      .header-right .icon {
-          width: 30px;
-          height: 30px;
-          background-color: #ccc;
-          border-radius: 50%;
-      } 
-
-
-      .logo { aspect-ratio: 1.2; 
-        object-fit: contain; 
-        object-position: center; 
-        width: 24px; 
-      }
-
-      .nav-wrapper { align-self: end; 
-        display: flex; 
-        width: 1151px; 
-        max-width: 100%; 
-        gap: 20px; 
-        flex-wrap: wrap; 
-        justify-content: space-between; 
-      }
-
-      .nav-links { display: flex; 
-        align-items: start;
-        gap: 40px 59px; 
-        color: #fff; 
-        flex-wrap: wrap; 
-        font: 300 24px Inter, sans-serif; 
-      }
-
-     
-
-      .stats-wrapper { display: flex; 
-        gap: 19px; 
-      }
-
-      .stats-link { align-self: start; 
-        flex-grow: 1; 
-      }
-
-      .vote-container { display: flex; 
-        flex-direction: column; 
-      }
-
-      .vote-link { align-self: center; 
-      }
-
-      .vote-indicator { background-color: #000; 
-        margin-top: 11px; 
-        height: 3px; 
-        border: 3px solid #fff; 
-      }
-
-      .social-links { align-self: start; 
-        display: flex;
-        margin-top: 4px; 
-        gap: 17px; }
-
-
-      .social-icon { aspect-ratio: 1.25; 
-        object-fit: contain; 
-        object-position: center; 
-        width: 25px; 
-      }
       .login-form-container { 
         background-color: #305479; 
         align-self: center; 
@@ -145,10 +22,13 @@
         color: #fff; 
         padding: 12px 80px 44px;
         font: 400 20px Inter, sans-serif; 
-        }
+      }
 
       .login-form { 
-        display: flex; width: 359px; max-width: 100%; flex-direction: column; 
+        display: flex; 
+        width: 359px; 
+        max-width: 100%; 
+        flex-direction: column; 
       }
 
       .greeting { 
@@ -171,7 +51,7 @@
         width: 289px; 
         max-width: 100%; 
         height: 46px;
-        }
+      }
 
       .submit-button { 
         border-radius: 59px; 
@@ -214,48 +94,48 @@
       }
 
       .confirmation-message {
-    width: 636px;
-    background-color: #305479;
-    align-self: center;
-    margin-top: 439px;
-    max-width: 100%;
-    color: #fff;
-    padding: 106px 70px 83px;
-    font: 400 20px Inter, sans-serif;
-  }
+        width: 636px;
+        background-color: #305479;
+        align-self: center;
+        margin-top: 439px;
+        max-width: 100%;
+        color: #fff;
+        padding: 106px 70px 83px;
+        font: 400 20px Inter, sans-serif;
+      }
 
-  .error-container {
-    background-color: #305479;
-    align-self: center;
-    display: flex;
-    margin-top: 439px;
-    width: 636px;
-    max-width: 100%;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 96px 80px;
-    font: 400 20px Inter, sans-serif;
-  }
-  .error-content {
-    display: flex;
-    width: 324px;
-    max-width: 100%;
-    flex-direction: column;
-  }
-  .error-message {
-    color: #fff;
-  }
-  .return-button {
-    border-radius: 59px;
-    background-color: #fff;
-    color: #000;
-    white-space: nowrap;
-    text-align: center;
-    margin: 53px 18px 0 17px;
-    padding: 23px 32px;
-    cursor: pointer;
-  }
+      .error-container {
+        background-color: #305479;
+        align-self: center;
+        display: flex;
+        margin-top: 439px;
+        width: 636px;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 96px 80px;
+        font: 400 20px Inter, sans-serif;
+      }
+      .error-content {
+        display: flex;
+        width: 324px;
+        max-width: 100%;
+        flex-direction: column;
+      }
+      .error-message {
+        color: #fff;
+      }
+      .return-button {
+        border-radius: 59px;
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        text-align: center;
+        margin: 53px 18px 0 17px;
+        padding: 23px 32px;
+        cursor: pointer;
+      }
 
       .redirect-message {
         width: 636px;
@@ -268,24 +148,6 @@
         font: 400 20px Inter, sans-serif;
       }
 
-      footer {
-            background-color: #003366;
-            color: white;
-            text-align: center;
-            padding: 1rem;
-            margin-top: 2rem;
-        }
-
-      .visually-hidden { 
-        position: absolute; 
-        width: 1px; 
-        height: 1px; 
-        padding: 0; 
-        margin: -1px; 
-        overflow: hidden; 
-        clip: rect(0,0,0,0); 
-        border: 0; 
-        }
     </style>
   </head>
   <body>
