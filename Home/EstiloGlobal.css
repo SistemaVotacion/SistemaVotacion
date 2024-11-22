@@ -1,3 +1,13 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+}
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -16,7 +26,7 @@ header {
     padding: 0.5rem 2rem;
     position: fixed;
     top: 0;
-    width: 97%;
+    width: 100%;
     z-index: 1000;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
@@ -28,7 +38,7 @@ header {
 .header-center {
     display: flex;
     align-items: center;
-    gap: 2rem; /* Separación entre elementos del menú */
+    gap: 2rem;
 }
 
 nav a {
@@ -36,7 +46,7 @@ nav a {
     text-decoration: none;
     font-size: 1rem;
     font-weight: bold;
-    margin: 0 1rem; /* Espaciado adicional entre los enlaces */
+    margin: 0 1rem;
 }
 
 nav a:hover {
