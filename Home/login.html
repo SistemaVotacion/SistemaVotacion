@@ -17,7 +17,7 @@
         color: #333;
       }
 
-      .header {
+      header {
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -225,12 +225,12 @@
         font: 400 20px Inter, sans-serif;
       }
 
-      .footer { 
-        background-color: #305479; 
-        margin-top: 216px; 
-        color: #fff; 
-        padding: 53px 70px;
-        font: 300 24px Inter, sans-serif; 
+      footer {
+            background-color: #003366;
+            color: white;
+            text-align: center;
+            padding: 1rem;
+            margin-top: 2rem;
         }
 
       .visually-hidden { 
@@ -245,59 +245,60 @@
         }
     </style>
   </head>
+  <body>
+    <header>
+      <div class="header-left">
+          <img src="https://via.placeholder.com/100x50" alt="Logo">
+      </div>
 
-  <header class="header">
-    <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1dcb170e5549162d97f8e7d4eff62fa1fb956f24239444ac5987544317c029e?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="logo" />
-    <nav class="nav-wrapper">
-      <div class="nav-links">
-        <a href="#" class="home-link">Inicio</a>
-        <a href="#" class="about-link">Sobre nosotros</a>
-        <div class="stats-wrapper">
-          <a href="#" class="stats-link">Estadisticas</a>
-          <div class="vote-container">
-            <a href="#" class="vote-link">Vota aqui</a>
-            <div class="vote-indicator"></div>
-          </div>
-        </div>
+      <div class="header-center">
+          <nav>
+              <a href="#inicio">Inicio</a>
+              <a href="#nosotros">Sobre Nosotros</a>
+              <a href="#estadisticas">Estadísticas</a>
+              <a href="#votar">Vota Aquí</a>
+          </nav>
+          <div class="search-icon">🔍</div>
       </div>
-      <div class="social-links">
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
-        <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
+
+      <div class="header-right">
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
       </div>
-    </nav>
   </header>
 
-  <main class="login-form-container">
-    <form class="login-form">
-      <h1 class="greeting">Buenos dias</h1>
-      <p class="instructions">
-        Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
-        Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
-        Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
+    <main class="login-form-container">
+      <form class="login-form">
+        <h1 class="greeting">Buenos dias</h1>
+        <p class="instructions">
+          Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
+          Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
+          Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
+        </p>
+        <label for="cedula" class="input-label">Cédula:</label>
+        <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
+        <button type="submit" class="submit-button">Aceptar</button>
+      </form>
+    </main>
+
+    <main class="verification-container">
+      <form class="verification-form">
+        <p class="verification-text">Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras "NI".</p>
+        <label for="verification-code" class="code-label">Código:</label>
+        <input type="text" id="verification-code" class="code-input" aria-label="Ingrese código de verificación" />
+        <button type="submit" class="submit-button">Aceptar</button>
+      </form>
+    </main>
+
+    <main>
+      <p class="redirect-message">
+        En unos segundos sera redirigido a la papeleta de votación. Gracias
       </p>
-      <label for="cedula" class="input-label">Cédula:</label>
-      <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
-      <button type="submit" class="submit-button">Aceptar</button>
-    </form>
-  </main>
+    </main>
 
-  <main class="verification-container">
-    <form class="verification-form">
-      <p class="verification-text">Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras "NI".</p>
-      <label for="verification-code" class="code-label">Código:</label>
-      <input type="text" id="verification-code" class="code-input" aria-label="Ingrese código de verificación" />
-      <button type="submit" class="submit-button">Aceptar</button>
-    </form>
-  </main>
-
-  <main>
-    <p class="redirect-message">
-      En unos segundos sera redirigido a la papeleta de votación. Gracias
-    </p>
-  </main>
-
-  <footer class="footer">
-    Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
-</footer>
+    <footer class="footer">
+      Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+    </footer>
+  </body>
 </html>
