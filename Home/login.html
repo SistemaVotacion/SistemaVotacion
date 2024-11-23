@@ -12,9 +12,7 @@
 
       .login-form-container { 
         background-color: #003366; 
-        align-self: center; 
         display: flex; 
-        margin-top: 238px; 
         width: 609px; 
         max-width: 100%; 
         flex-direction: column; 
@@ -149,6 +147,14 @@
         font: 400 20px Inter, sans-serif;
       }
 
+      .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
     </style>
   </head>
   <body>
@@ -173,8 +179,13 @@
             <a href="https://x.com/?lang=es" target="_blank"><div class="icon twitter"></div></a>
       </div>
   </header>
-
-    <main class="login-form-container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section class="login-form-container">
       <form class="login-form">
         <h1 id="greeting" class="greeting">Buenos dias</h1>
         <p id="instructions" class="instructions">
@@ -186,10 +197,11 @@
         <input type="text" id="cedula" class="cedula-input" />
         <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
-    </main>
+    </section>
 
+  </div>
   
-
+<!-- 
     <section class="confirmation-message">
       <p>
         Estimado ciudadano: nuestros registros muestan que usted ha votado. Gracias por ejercer el sufragio.
@@ -204,7 +216,8 @@
         <button class="return-button" tabindex="0">Regresar</button>
       </section>
     </main>
-
+ -->
+    
     <footer class="footer">
       Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
     </footer>
