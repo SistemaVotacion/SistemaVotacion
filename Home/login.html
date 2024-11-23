@@ -217,6 +217,7 @@
       window.addEventListener('load', function() {
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById("button").disabled = true;
+          console.log("cargo");
         }
       });
 
@@ -230,22 +231,23 @@
             console.log(document.getElementById('button')); 
             } else {
               cambiarPantallaACodigo();
+              console.log("no se desactivo boton");
+
             }
         });
       }
-
-      console.log(bienvenida.innerHTML);
 
       function validacion(){
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById('button').setAttribute('onclick', 'nulo()');    
           alert('introducir cedula');
+          console.log("validacion");
         }
       }
 
       function nulo(){
-        console.log("a");
+        console.log("nulo");
       }
         
       function cambiarPantallaACodigo(){
@@ -255,7 +257,7 @@
         document.getElementById('input-label').innerText="Código";
         document.getElementById('button').setAttribute('onclick', 'cambiarPantallaAPapeleta()');    
         var cedula = document.getElementById('cedula').value;
-        console.log(cedula);
+        console.log("cambiarPantallaACodigo");
       }
 
       function cambiarPantallaAPapeleta(){
@@ -264,7 +266,8 @@
           document.getElementById('cedula').remove();
           document.getElementById('button').remove();
 
-          
+          console.log("cambiarPantallaAPapeleta");
+
           window.setTimeout(function(){
             window.location.href = "/PapeletaGit/Papeleta.html";
             }, 3000);
