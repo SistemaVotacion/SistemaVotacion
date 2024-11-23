@@ -176,25 +176,18 @@
     <main class="login-form-container">
       <form class="login-form">
         <h1 id="greeting" class="greeting">Buenos dias</h1>
-        <p class="instructions">
+        <p id="instructions" class="instructions">
           Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
           Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
-        <label for="cedula" class="input-label">Cédula:</label>
+        <label for="cedula" class="input-label" id="input-label">Cédula:</label>
         <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
         <button type="submit" class="submit-button" onclick="cambiarPantallaACodigo()">Aceptar</button>
       </form>
     </main>
 
-    <main class="verification-container">
-      <form class="verification-form">
-        <p class="verification-text">Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras "NI".</p>
-        <label for="verification-code" class="code-label">Código:</label>
-        <input type="text" id="verification-code" class="code-input" aria-label="Ingrese código de verificación" />
-        <button type="submit" class="submit-button">Aceptar</button>
-      </form>
-    </main>
+  
 
     <section class="confirmation-message">
       <p>
@@ -227,6 +220,8 @@
         
       function cambiarPantallaACodigo(){
         document.getElementById('greeting').innerText="";
+        document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
+        document.getElementById('input-label').innerText="Código";
 
         console.log('asdfasdf');
     
