@@ -182,7 +182,7 @@
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
-        <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
+        <input type="text" id="cedula" class="cedula-input" oninput="validacion()" />
         <button type="button" class="submit-button" id="button" onclick="cambiarPantallaACodigo()">Aceptar</button>
       </form>
     </main>
@@ -214,8 +214,13 @@
 
    var cedula = document.getElementById('cedula').value;
    console.log(cedula);
+   validacion();
 
    console.log(bienvenida.innerHTML);
+
+      function validacion(){
+        document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+      }
         
       function cambiarPantallaACodigo(){
         document.getElementById('greeting').innerText="";
@@ -234,7 +239,7 @@
 
           
           window.setTimeout(function(){
-            window.location.href = "Home.html";
+            window.location.href = "/PapeletaGit/Papeleta.html";
             }, 3000);
 
       }
