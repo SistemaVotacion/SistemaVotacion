@@ -157,13 +157,13 @@
       </div>
 
       <div class="header-center">
-          <nav>
-              <a href="#inicio">Inicio</a>
-              <a href="#nosotros">Sobre Nosotros</a>
-              <a href="#estadisticas">Estadísticas</a>
-              <a href="#votar">Vota Aquí</a>
-          </nav>
-          <div class="search-icon">🔍</div>
+        <nav>
+            <a href="Home.html">Inicio</a>
+            <a href="SobreNosotros.html">Sobre Nosotros</a>
+            <a href="Estadisticas.html">Estadísticas</a>
+            <a href="login.html">Vota Aquí</a>
+        </nav>
+        <a href="https://google.com"><div class="search-icon">🔍</div></a>
       </div>
 
       <div class="header-right">
@@ -183,7 +183,7 @@
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
         <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
-        <button type="submit" class="submit-button" onclick="cambiarPantallaACodigo()">Aceptar</button>
+        <button type="button" class="submit-button" id="button" onclick="cambiarPantallaACodigo()">Aceptar</button>
       </form>
     </main>
 
@@ -204,31 +204,39 @@
       </section>
     </main>
 
-    <main>
-      <p class="redirect-message">
-        En unos segundos sera redirigido a la papeleta de votación. Gracias
-      </p>
-    </main>
-
     <footer class="footer">
       Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
     </footer>
 
     <script>
    var bienvenida = document.getElementById('greeting');
+   var cedula, codigo;
+
+   var cedula = document.getElementById('cedula').value;
+   console.log(cedula);
+
    console.log(bienvenida.innerHTML);
         
       function cambiarPantallaACodigo(){
         document.getElementById('greeting').innerText="";
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
-
-        console.log('asdfasdf');
-    
+        document.getElementById('button').setAttribute('onclick', 'cambiarPantallaAPapeleta()');    
+        var cedula = document.getElementById('cedula').value;
+        console.log(cedula);
       }
 
       function cambiarPantallaAPapeleta(){
-        
+        document.getElementById('instructions').innerText="En unos segundos sera redirigido a la papeleta de votación. Gracias.";
+          document.getElementById('input-label').remove();
+          document.getElementById('cedula').remove();
+          document.getElementById('button').remove();
+
+          
+          window.setTimeout(function(){
+            window.location.href = "Home.html";
+            }, 3000);
+
       }
       
     </script>

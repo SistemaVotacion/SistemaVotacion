@@ -8,7 +8,7 @@
     <style>
         /* Hero Section */
         .hero {
-            background: url('https://via.placeholder.com/1920x1080') no-repeat center center/cover;
+            background: url('imagen-cerro-ancon-1000x579a.webp') no-repeat center center/cover;
             color: white;
             text-align: center;
             display: flex;
@@ -25,7 +25,7 @@
             margin-bottom: 1rem;
         }
 
-        .hero button {
+        .hero div {
             background-color: white;
             color: #003366;
             border: none;
@@ -47,6 +47,10 @@
             50% {
                 transform: scale(1.1);
             }
+        }
+        
+        #noticias{
+            text-align: center;       
         }
 
         /* Contenedor principal */
@@ -96,18 +100,12 @@
         .video-box {
             background-color: #e0e0e0;
             border: 1px solid #ccc;
-            padding: 1rem;
+            padding: 16px;
             border-radius: 5px;
             width: 100%;
             max-width: 1200px;
             text-align: center;
         }
-
-        .video-box video {
-            width: 100%;
-            border-radius: 5px;
-        }
-
         
     </style>
 </head>
@@ -119,12 +117,12 @@
 
         <div class="header-center">
             <nav>
-                <a href="#inicio">Inicio</a>
-                <a href="#nosotros">Sobre Nosotros</a>
-                <a href="#estadisticas">Estadísticas</a>
-                <a href="#votar">Vota Aquí</a>
+                <a href="Home.html">Inicio</a>
+                <a href="SobreNosotros.html">Sobre Nosotros</a>
+                <a href="Estadisticas.html">Estadísticas</a>
+                <a href="login.html">Vota Aquí</a>
             </nav>
-            <div class="search-icon">🔍</div>
+            <a href="https://google.com" style="text-decoration: none;"><div class="search-icon">🔍</div></a>
         </div>
 
         <div class="header-right">
@@ -136,8 +134,12 @@
 
     <div class="hero">
         <h1>lghj, mmlkjhj khjjkl,</h1>
-        <button id="vote-button">Vota aquí</button>
+        <a href="login.html" style="text-decoration: none;"><div id="vote-button">Vota aquí</div></a>
     </div>
+
+    <br>
+    <br>
+    <h1 id="noticias">Noticias:</h1>
 
     <main class="content">
         <div class="image-row">
@@ -152,10 +154,10 @@
         </div>
 
         <div class="video-box">
-            <video controls>
-                <source src="https://via.placeholder.com/video.mp4" type="video/mp4">
-                Tu navegador no soporta el video.
-            </video>
+            <iframe width="1168" height="526" src="https://www.youtube.com/embed/Cc80iDuJqGQ" title="Elecciones en Panamá: 
+            José Gabriel Carrizo reconoce virtual triunfo de José Raúl Mulino" 
+            frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
+            picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <p>Descripción del video</p>
         </div>
     </main>
