@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Disabled Button Example</title>
+    <style>
+        .button {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            color: white;
+            background-color: gray;
+            border: none;
+            border-radius: 5px;
+            cursor: not-allowed;
+            text-align: center;
+            user-select: none;
+        }
+        .button.enabled {
+            background-color: blue;
+            cursor: pointer;
+        }
+        .error-message {
+            color: red;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div id="myButton" class="button">Click Me</div>
+    <p id="errorMessage" class="error-message">Error: This button is disabled!</p>
+
+    <script>
+        const button = document.getElementById('myButton');
+        const errorMessage = document.getElementById('errorMessage');
+
+        let isEnabled = false; // Change this to `true` to enable the button
+
+        button.addEventListener('click', () => {
+            if (!isEnabled) {
+                errorMessage.style.display = 'block';
+                setTimeout(() => {
+                    errorMessage.style.display = 'none';
+                }, 2000); // Hides the message after 2 seconds
+            } else {
+                alert('Button clicked!');
+            }
+        });
+
+        // Optionally, toggle button state (e.g., after some event)
+        function toggleButtonState() {
+            isEnabled = !isEnabled;
+            button.classList.toggle('enabled', isEnabled);
+            button.style.cursor = isEnabled ? 'pointer' : 'not-allowed';
+        }
+
+        // Example: Uncomment to enable button after 5 seconds
+        // setTimeout(toggleButtonState, 5000);
+    </script>
+</body>
+</html>
