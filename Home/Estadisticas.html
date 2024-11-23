@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estadísticas</title>
+    <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
+    <style>
+        /* Contenedor principal */
+        main {
+            flex: 1;
+            padding: 8rem 2rem 2rem; /* Margen considerando el header */
+            display: flex;
+            justify-content: flex-start;
+            gap: 2rem;
+        }
+
+        /* Contenedor de votos */
+        .votes-container {
+            flex: 1;
+            max-width: 400px;
+            background-color: #f9f9f9;
+            padding: 1.5rem;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        /* Resultados */
+        .results-container {
+            flex: 2;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .result-box {
+    background-color: #f9f9f9;
+    padding: 1.5rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+
+    /* Controlar el tamaño */
+    width: 1000px; /* Ancho fijo */
+    height: 250px; /* Alto fijo */
+
+    /* Controlar el tamaño máximo y mínimo */
+    max-width: 9000px; /* El ancho no puede ser mayor a 400px */
+    min-width: 500px; /* El ancho no puede ser menor a 200px */
+    max-height: 500px; /* El alto no puede ser mayor a 300px */
+    min-height: 150px; /* El alto no puede ser menor a 150px */
+}
+
+
+        h2 {
+            margin-bottom: 1rem;
+        }
+
+        .section {
+            margin-bottom: 2rem;
+        }
+
+        .dropdown-container {
+            margin-bottom: 1rem;
+        }
+
+        select, button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 1rem;
+        }
+
+        button {
+            background-color: #007BFF;
+            color: white;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+        .total-votes {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .results-container p {
+            text-align: center;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-left">
+            <img src="https://via.placeholder.com/100x50" alt="Logo">
+        </div>
+
+        <div class="header-center">
+            <nav>
+                <a href="Home.html">Inicio</a>
+                <a href="SobreNosotros.html">Sobre Nosotros</a>
+                <a href="Estadisticas.html" class="active">Estadísticas</a>
+                <a href="login.html">Vota Aquí</a>
+            </nav>
+            <a href="https://google.com"><div class="search-icon">🔍</div></a>
+        </div>
+
+        <div class="header-right">
+            <div class="icon"></div>
+            <div class="icon"></div>
+            <div class="icon"></div>
+        </div>
+    </header>
+
+    <!-- Contenido principal -->
+    <main>
+        <!-- Contenedor de votos -->
+        <div class="votes-container">
+            <!-- Total de votos -->
+            <div class="total-votes">
+                Total de votos: <span id="total-votos">0/100</span>
+            </div>
+
+            <!-- Votos por provincia -->
+            <div class="section">
+                <h2>Votos por provincia</h2>
+                <div class="dropdown-container">
+                    <label for="provincia">Selecciona una provincia:</label>
+                    <select id="provincia">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="panama">Panamá</option>
+                        <option value="colon">Colón</option>
+                        <option value="chiriqui">Chiriquí</option>
+                        <!-- Añadir más provincias aquí -->
+                    </select>
+                    <button id="provincia-btn">Aceptar</button>
+                </div>
+            </div>
+
+            <!-- Votos por candidato -->
+            <div class="section">
+                <h2>Votos por candidato</h2>
+                <div class="dropdown-container">
+                    <label for="candidato">Selecciona un candidato:</label>
+                    <select id="candidato">
+                        <option value="">-- Seleccionar --</option>
+                        <option value="candidato1">Candidato 1</option>
+                        <option value="candidato2">Candidato 2</option>
+                        <option value="candidato3">Candidato 3</option>
+                        <!-- Añadir más candidatos aquí -->
+                    </select>
+                    <button id="candidato-btn">Aceptar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Contenedor de resultados -->
+        <div class="results-container" id="results-container">
+            <!-- Resultados por provincia -->
+            <div class="result-box">
+                <h2>Resultados por provincia</h2>
+                <p>Los resultados por provincia aparecerán aquí.</p>
+            </div>
+
+            <!-- Resultados por candidato -->
+            <div class="result-box">
+                <h2>Resultados por candidato</h2>
+                <p>Los resultados por candidato aparecerán aquí.</p>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        Carrasco, Nathan; Gómez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+    </footer>
+</body>
+</html>
