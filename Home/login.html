@@ -182,7 +182,7 @@
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
-        <input type="text" id="cedula" class="cedula-input" oninput="validacion()" />
+        <input type="text" id="cedula" class="cedula-input" oninput="ValidacionVacio()" />
         <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
     </main>
@@ -228,6 +228,7 @@
             if (document.getElementById("button").disabled) {
               document.getElementById('button').setAttribute('onclick', 'nulo()');   
               alert('introducir cedula');
+              console.log("se desactivo boton");
             console.log(document.getElementById('button')); 
             } else {
               cambiarPantallaACodigo();
@@ -237,13 +238,21 @@
         });
       }
 
-      function validacion(){
+      function ValidacionVacio(){
+        console.log("ValidacionVacioLlamado");
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+        const pattern = /^[a-zA-Z0-9]{1,2}-\d{0,4}-\d{0,4}$/;
+        console.log("ValidacionVacioNoFunciono_NoVacio");
+        const resultado = pattern.test(document.getElementById('cedula').value);
+        console.log("ValidacionVacioNoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
+
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById('button').setAttribute('onclick', 'nulo()');    
           alert('introducir cedula');
-          console.log("validacion");
+          console.log("ValidacionVacioFunciono");
         }
+        return resultado
+
       }
 
       function nulo(){
