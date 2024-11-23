@@ -14,10 +14,6 @@
         background-color: #003366; 
         display: flex; 
         width: 609px; 
-        position: absolute;
-        left: 50%;
-        top: 75%;
-        transform: translate(-50%, -50%);
         max-width: 100%; 
         flex-direction: column; 
         align-items: center; 
@@ -151,6 +147,14 @@
         font: 400 20px Inter, sans-serif;
       }
 
+      .content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 2rem;
+            gap: 2rem;
+        }
+
     </style>
   </head>
   <body>
@@ -175,8 +179,13 @@
             <a href="https://x.com/?lang=es"><div class="icon twitter"></div></a>
       </div>
   </header>
-
-    <main class="login-form-container">
+  <br>
+  <br>
+  <br>
+  <br>
+  <br>
+  <div class="content">
+    <section class="login-form-container">
       <form class="login-form">
         <h1 id="greeting" class="greeting">Buenos dias</h1>
         <p id="instructions" class="instructions">
@@ -188,9 +197,9 @@
         <input type="text" id="cedula" class="cedula-input" />
         <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
-    </main>
+    </section>
 
-
+  </div>
   
 <!-- 
     <section class="confirmation-message">
