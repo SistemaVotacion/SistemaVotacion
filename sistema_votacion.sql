@@ -1,7 +1,5 @@
 create database RegistroDeVoto
 
-use RegistroDeVoto
-
 CREATE TABLE candidatos (
   candidato_id int  PRIMARY KEY NOT NULL,
   nombre VARCHAR(25) NOT NULL,
