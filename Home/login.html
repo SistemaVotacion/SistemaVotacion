@@ -175,7 +175,7 @@
 
     <main class="login-form-container">
       <form class="login-form">
-        <h1 class="greeting">Buenos dias</h1>
+        <h1 id="greeting">Buenos dias</h1>
         <p class="instructions">
           Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
           Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
@@ -183,7 +183,7 @@
         </p>
         <label for="cedula" class="input-label">Cédula:</label>
         <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
-        <button type="submit" class="submit-button">Aceptar</button>
+        <button type="submit" class="submit-button" onclick="cambiarPantallaACodigo()">Aceptar</button>
       </form>
     </main>
 
@@ -220,5 +220,21 @@
     <footer class="footer">
       Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
     </footer>
+
+    <script>
+   var bienvenida = document.getElementById('greeting');
+   console.log(bienvenida.innerHTML);
+        
+      function cambiarPantallaACodigo(){
+        
+    
+      }
+
+      function cambiarPantallaAPapeleta(){
+        
+      }
+      
+    </script>
+
   </body>
 </html>
