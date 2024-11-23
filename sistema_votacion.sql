@@ -37,5 +37,5 @@ CREATE TABLE votos (
   Provincia VARCHAR(30) DEFAULT NULL,
 ) 
 
-ALTER TABLE votes
+ALTER TABLE votos
   ADD CONSTRAINT votos_ibfk_2 FOREIGN KEY (candidato_id) REFERENCES candidatos (candidato_id);
