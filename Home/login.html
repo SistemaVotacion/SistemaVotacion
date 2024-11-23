@@ -183,7 +183,7 @@
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
         <input type="text" id="cedula" class="cedula-input" oninput="validacion()" />
-        <div type="button" class="submit-button" id="button" onclick="cambiarPantallaACodigo()">Aceptar</div>
+        <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
     </main>
 
@@ -221,22 +221,35 @@
       });
 
       var boton = document.getElementById("button");
+
+      function botonDesactivado(){
       boton.addEventListener('click', (event) => {
             if (document.getElementById("button").disabled) {
+              document.getElementById('button').setAttribute('onclick', 'nulo()');   
               alert('introducir cedula');
+            console.log(document.getElementById('button')); 
+            } else {
+              cambiarPantallaACodigo();
             }
         });
+      }
 
       console.log(bienvenida.innerHTML);
 
       function validacion(){
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
         if (document.getElementById('cedula').value.trim() === ""){
+          document.getElementById('button').setAttribute('onclick', 'nulo()');    
           alert('introducir cedula');
         }
       }
+
+      function nulo(){
+        console.log("a");
+      }
         
       function cambiarPantallaACodigo(){
+
         document.getElementById('greeting').innerText="";
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
