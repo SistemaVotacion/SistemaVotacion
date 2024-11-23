@@ -226,7 +226,7 @@
       function botonDesactivado(){
       boton.addEventListener('click', (event) => {
             if (document.getElementById("button").disabled) {
-              document.getElementById('button').setAttribute('onclick', 'nulo()');   
+              document.getElementById('button').setAttribute('onclick', 'nuloa()');   
               alert('introducir cedula');
               console.log("se desactivo boton");
             console.log(document.getElementById('button')); 
@@ -258,6 +258,10 @@
       function nulo(){
         console.log("nulo");
       }
+
+      function nuloa(){
+        console.log("nuloa");
+      }
         
       function cambiarPantallaACodigo(){
 
@@ -265,7 +269,8 @@
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
         document.getElementById('button').setAttribute('onclick', 'cambiarPantallaAPapeleta()');    
-        var cedula = document.getElementById('cedula').value;
+        document.getElementById('cedula').value = "";
+        var codigo = document.getElementById('cedula').value;
         console.log("cambiarPantallaACodigo");
       }
 
