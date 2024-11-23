@@ -1,134 +1,245 @@
-<style>
-.login-container { 
-  background-color: #fff; display: flex; flex-direction: column; overflow: hidden; }
-.header { background-color: #305479; display: flex; width: 100%; flex-direction: column; padding: 8px 40px 17px 14px; }
-@media (max-width: 991px) { .header { max-width: 100%; padding-right: 20px; } }
-.logo { aspect-ratio: 1.2; object-fit: contain; object-position: center; width: 24px; }
-.nav-wrapper { align-self: end; display: flex; width: 1151px; max-width: 100%; gap: 20px; flex-wrap: wrap; justify-content: space-between; }
-.nav-links { display: flex; align-items: start; gap: 40px 59px; color: #fff; flex-wrap: wrap; font: 300 24px Inter, sans-serif; }
-@media (max-width: 991px) { .nav-links { max-width: 100%; } }
-.about-link { flex-basis: auto; }
-.stats-wrapper { display: flex; gap: 19px; }
-.stats-link { align-self: start; flex-grow: 1; }
-.vote-container { display: flex; flex-direction: column; }
-.vote-link { align-self: center; }
-.vote-indicator { background-color: #000; margin-top: 11px; height: 3px; border: 3px solid #fff; }
-.social-links { align-self: start; display: flex; margin-top: 4px; gap: 17px; }
-.social-icon { aspect-ratio: 1.25; object-fit: contain; object-position: center; width: 25px; }
-.login-form-container { background-color: #305479; align-self: center; display: flex; margin-top: 238px; width: 609px; max-width: 100%; flex-direction: column; align-items: center; color: #fff; padding: 12px 80px 44px; font: 400 20px Inter, sans-serif; }
-@media (max-width: 991px) { .login-form-container { margin-top: 40px; padding: 0 20px; } }
-.login-form { display: flex; width: 359px; max-width: 100%; flex-direction: column; }
-.greeting { font-size: 64px; }
-@media (max-width: 991px) { .greeting { font-size: 40px; } }
-.instructions { 
-  margin: 46px 21px 0 26px; 
-}
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
+    <style>
+      .login-container { 
+        background-color: #fff; 
+        display: flex; 
+        flex-direction: column; 
+        overflow: hidden; 
+      }
 
-@media (max-width: 991px) { 
-  .instructions { 
-  margin: 40px 10px 0; 
-  } 
-}
+      .login-form-container { 
+        background-color: #305479; 
+        align-self: center; 
+        display: flex; 
+        margin-top: 238px; 
+        width: 609px; 
+        max-width: 100%; 
+        flex-direction: column; 
+        align-items: center; 
+        color: #fff; 
+        padding: 12px 80px 44px;
+        font: 400 20px Inter, sans-serif; 
+      }
 
-.input-label { 
-  align-self: start; margin: 34px 0 0 26px; 
-}
+      .login-form { 
+        display: flex; 
+        width: 359px; 
+        max-width: 100%; 
+        flex-direction: column; 
+      }
 
-@media (max-width: 991px) { 
-  .input-label { 
-    margin-left: 10px; 
-  } 
-}
-.cedula-input { 
-  background-color: #fff; 
-  align-self: center;
-   display: flex; 
-   margin-top: 14px; 
-   width: 289px; 
-   max-width: 100%; 
-   height: 46px;
-   }
+      .greeting { 
+        font-size: 64px; 
+      }
 
-.submit-button { 
-  border-radius: 59px; 
-  background-color: #fff; 
-  align-self: center; 
-  margin-top: 34px; 
-  width: 289px; 
-  max-width: 100%; 
-  color: #000; 
-  text-align: center; 
-  padding: 23px 36px;
- }
+      .instructions { 
+        margin: 46px 21px 0 26px; 
+      }
 
-@media (max-width: 991px) { 
-  .submit-button { 
-    padding: 0 20px; 
-  } 
-}
+      .input-label { 
+        align-self: start; margin: 34px 0 0 26px; 
+      }
 
-.footer { 
-  background-color: #305479; 
-  margin-top: 216px; 
-  color: #fff; 
-  padding: 53px 70px;
-   font: 300 24px Inter, sans-serif; 
-  }
+      .cedula-input { 
+        background-color: #fff; 
+        align-self: center;
+        display: flex; 
+        margin-top: 14px; 
+        width: 289px; 
+        max-width: 100%; 
+        height: 46px;
+      }
 
-@media (max-width: 991px) { 
-  .footer { 
-    max-width: 100%; margin-top: 40px; padding: 0 20px; 
-  } 
-}
+      .submit-button { 
+        border-radius: 59px; 
+        background-color: #fff; 
+        align-self: center; 
+        margin-top: 34px; 
+        width: 289px; 
+        max-width: 100%; 
+        color: #000; 
+        text-align: center; 
+        padding: 23px 36px;
+      }
 
-.visually-hidden { 
-  position: absolute; 
-  width: 1px; 
-  height: 1px; 
-  padding: 0; 
-  margin: -1px; 
-  overflow: hidden; 
-  clip: rect(0,0,0,0); 
-  border: 0; 
-  }
-</style>
+      .verification-container {
+        background-color: rgb(48, 84, 121);
+        align-self: center;
+        display: flex;
+        margin-top: 355px;
+        width: 636px;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        color: rgb(255, 255, 255);
+        justify-content: center;
+        padding: 36px 80px;
+        font: 400 20px Inter, sans-serif;
+      }
 
-<header class="header">
-  <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/b1dcb170e5549162d97f8e7d4eff62fa1fb956f24239444ac5987544317c029e?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="logo" />
-  <nav class="nav-wrapper">
-    <div class="nav-links">
-      <a href="#" class="home-link">Inicio</a>
-      <a href="#" class="about-link">Sobre nosotros</a>
-      <div class="stats-wrapper">
-        <a href="#" class="stats-link">Estadisticas</a>
-        <div class="vote-container">
-          <a href="#" class="vote-link">Vota aqui</a>
-          <div class="vote-indicator"></div>
-        </div>
+      .verification-form {
+        display: flex;
+        margin-left: 15px;
+        width: 324px;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: start;
+      }
+
+      .verification-text {
+        align-self: stretch;
+      }
+
+      .confirmation-message {
+        width: 636px;
+        background-color: #305479;
+        align-self: center;
+        margin-top: 439px;
+        max-width: 100%;
+        color: #fff;
+        padding: 106px 70px 83px;
+        font: 400 20px Inter, sans-serif;
+      }
+
+      .error-container {
+        background-color: #305479;
+        align-self: center;
+        display: flex;
+        margin-top: 439px;
+        width: 636px;
+        max-width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        padding: 96px 80px;
+        font: 400 20px Inter, sans-serif;
+      }
+      .error-content {
+        display: flex;
+        width: 324px;
+        max-width: 100%;
+        flex-direction: column;
+      }
+      .error-message {
+        color: #fff;
+      }
+      .return-button {
+        border-radius: 59px;
+        background-color: #fff;
+        color: #000;
+        white-space: nowrap;
+        text-align: center;
+        margin: 53px 18px 0 17px;
+        padding: 23px 32px;
+        cursor: pointer;
+      }
+
+      .redirect-message {
+        width: 636px;
+        background-color: rgb(48, 84, 121);
+        align-self: center;
+        margin-top: 439px;
+        max-width: 100%;
+        color: rgb(255, 255, 255);
+        padding: 98px 70px;
+        font: 400 20px Inter, sans-serif;
+      }
+
+    </style>
+  </head>
+  <body>
+    <header>
+      <div class="header-left">
+          <img src="https://via.placeholder.com/100x50" alt="Logo">
       </div>
-    </div>
-    <div class="social-links">
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/22e18a7caef788ad63e50757d3cba39e5db9cde69046f472807b5f61d0363962?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/651f10e86581be7911f2803917349c576fcce1d13c6c1ccf9cb799604fc053b5?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
-      <img loading="lazy" src="https://cdn.builder.io/api/v1/image/assets/TEMP/1799cce2e5049d433fd7d895329cc475b43074e387a217127e97d1d24ea26da9?placeholderIfAbsent=true&apiKey=ae9f57a0139c4c9e9974865c0dc7b0d2" alt="" class="social-icon" />
-    </div>
-  </nav>
-</header>
 
-<main class="login-form-container">
-  <form class="login-form">
-    <h1 class="greeting">Buenos dias</h1>
-    <p class="instructions">
-      Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
-      Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
-      Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
-    </p>
-    <label for="cedula" class="input-label">Cédula:</label>
-    <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
-    <button type="submit" class="submit-button">Aceptar</button>
-  </form>
-</main>
+      <div class="header-center">
+        <nav>
+            <a href="Home.html">Inicio</a>
+            <a href="SobreNosotros.html">Sobre Nosotros</a>
+            <a href="Estadisticas.html">Estadísticas</a>
+            <a href="login.html">Vota Aquí</a>
+        </nav>
+        <a href="https://google.com"><div class="search-icon">🔍</div></a>
+      </div>
 
-<footer class="footer">
-  Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
-</footer>
+      <div class="header-right">
+          <div class="icon"></div>
+          <div class="icon"></div>
+          <div class="icon"></div>
+      </div>
+  </header>
+
+    <main class="login-form-container">
+      <form class="login-form">
+        <h1 id="greeting" class="greeting">Buenos dias</h1>
+        <p id="instructions" class="instructions">
+          Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
+          Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
+          Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
+        </p>
+        <label for="cedula" class="input-label" id="input-label">Cédula:</label>
+        <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
+        <button type="button" class="submit-button" id="button" onclick="cambiarPantallaACodigo()">Aceptar</button>
+      </form>
+    </main>
+
+  
+
+    <section class="confirmation-message">
+      <p>
+        Estimado ciudadano: nuestros registros muestan que usted ha votado. Gracias por ejercer el sufragio.
+        <br /><br />
+        En unos segundos sera redirigido a la pagina de inicio. Gracias.
+      </p>
+    </section>
+
+    <main class="error-container">
+      <section class="error-content">
+        <p class="error-message">Su cedula no se ha encontrado en el sistema. Puede regresar a revisarla e intentar de nuevo.</p>
+        <button class="return-button" tabindex="0">Regresar</button>
+      </section>
+    </main>
+
+    <footer class="footer">
+      Carrasco, Nathan; Gomez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+    </footer>
+
+    <script>
+   var bienvenida = document.getElementById('greeting');
+   var cedula, codigo;
+
+   var cedula = document.getElementById('cedula').value;
+   console.log(cedula);
+
+   console.log(bienvenida.innerHTML);
+        
+      function cambiarPantallaACodigo(){
+        document.getElementById('greeting').innerText="";
+        document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
+        document.getElementById('input-label').innerText="Código";
+        document.getElementById('button').setAttribute('onclick', 'cambiarPantallaAPapeleta()');    
+        var cedula = document.getElementById('cedula').value;
+        console.log(cedula);
+      }
+
+      function cambiarPantallaAPapeleta(){
+        document.getElementById('instructions').innerText="En unos segundos sera redirigido a la papeleta de votación. Gracias.";
+          document.getElementById('input-label').remove();
+          document.getElementById('cedula').remove();
+          document.getElementById('button').remove();
+
+          
+          window.setTimeout(function(){
+            window.location.href = "Home.html";
+            }, 3000);
+
+      }
+      
+    </script>
+
+  </body>
+</html>

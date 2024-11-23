@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
+using Microsoft.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +21,22 @@ using System.Text.Json;
 
 // este archivo es un api para login con contrasenia (cedula) y codigo en la parte de la cedula (?)
 
+//falta mientras la votación esta en progreso el número de votos por candidato
+//podría ser 0 si la base de datos no se puede acceder por estar bloqueada durante la votación 
+
+//(despues)tuplas en listas en c# en API login
+//(después)confiar en certificado base de datos API login
+// (despues)bytes en hexadecimal en string en vez de base64 para simplicidad 
+//(despues)mover archivos en servidor para renombrar papeletas y darlas por el API
+// API para registrar el voto
+// API para estadisticas
+// arreglar html
+// separar css en global y local
+// hacer javascript de login, papeleta
+// hacer variante para desarrollo 5 que solo valide la cédula pero no la revisa con bd
+// hacer trabajo escrito
+// hacer Canva
+// hacer wireframes
 namespace login.Controllers
 {
     [ApiController]
@@ -33,15 +49,19 @@ namespace login.Controllers
         {
             ConexionDB baseDeDatos = new ConexionDB();
 
-            //para hacer hasing criptografico para que no se puedan facilmente deducir cedulas desde el sistema
+            //para hacer hasing criptografico para que no se puedan facilmente deducir cedulas desde el sistema, ayuda a mantener el secreto del voto
             byte[] data = Encoding.UTF8.GetBytes(request.Password); // Conveierte contrasenia (cedula) a bytes para hashing
+            byte[] dataCodigo = Encoding.UTF8.GetBytes(request.Password); // Conveierte codigo en reverso de cedula a bytes para hashing
             byte[] result; //resultado de hashing en bytes
+            byte[] resultCodigo; //resultado de hashing en bytes
             string resultadoBase54;
 
             //algoritmo de hashing criptografico
             using (SHA512 sha512 = SHA512.Create())
             {
                 result = sha512.ComputeHash(data);
+                resultCodigo = sha512.ComputeHash(dataCodigo);
+
             }
 
             resultadoBase54 = System.Convert.ToBase64String(result); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
@@ -53,7 +73,7 @@ namespace login.Controllers
 
             //falta concatenar la cedula y el dato en la parte de atras de la cedula
 
-            var user = usuarioLogin.FirstOrDefault(u => u.Username == request.Username && u.Password == request.Password); // verificar usuario
+            var user = usuarioLogin.FirstOrDefault(u => u.Username == result && u.Password == resultCodigo); // verificar usuario
 
             if (user != null)
             {
@@ -62,21 +82,24 @@ namespace login.Controllers
             return Unauthorized(new { message = "Invalid username or password." });
         }
 
-        public class LoginRequest //dfhkb
+        public class LoginRequest //lo que se acepta de los usuarios
         {
             public string Username { get; set; }
             public string Password { get; set; }
+
         }
 
-        public class UserAuth
+        public class UserAuth // para uso interno del progrma, como guardar datos
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
+            public byte[] Username { get; set; }
+            public byte[] Password { get; set; }
+
         }
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True";
+            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True;TrustServerCertificate=True";
+
 
             private static readonly List<UserAuth> Users = new List<UserAuth>();
 
@@ -96,9 +119,6 @@ namespace login.Controllers
                         command.Parameters.AddWithValue("@usuario", usuarioVer);
                         command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
-
-
-
                         // Abrir la conexión y ejecutar el procedimiento almacenado
                         command.Connection.Open();
                         SqlDataReader reader = command.ExecuteReader();
@@ -107,8 +127,8 @@ namespace login.Controllers
                         {
                             Users.Add(new UserAuth()
                             {
-                                Username = (string)reader[0], //username y password estan especificados en la clase UserAuth
-                                Password = (string)reader[1],
+                                Username = (byte[])reader[0], //username y password estan especificados en la clase UserAuth
+                                Password = (byte[])reader[1],
                             });
                         }
                         reader.Close();

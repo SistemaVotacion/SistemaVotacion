@@ -2,9 +2,8 @@
 # This .gitignore file was automatically created by Microsoft(R) Visual Studio.
 ################################################################################
 
-/.vs
-/bin
-/obj
+**/.vs
+**/bin
 /obj/login.csproj.nuget.dgspec.json
 /obj/login.csproj.nuget.g.props
 /obj/project.assets.json
@@ -12,5 +11,8 @@
 obj/Debug/net8.0/login.AssemblyInfo.cs
 obj/Debug/net8.0/login.AssemblyInfoInputs.cache
 obj/Debug/net8.0/login.AssemblyInfo.cs
-/obj/Debug/net8.0/login.AssemblyInfo.cs
+obj/Debug/net8.0/login.AssemblyInfoInputs.cache
+obj/Debug/net8.0/login.AssemblyInfoInputs.cache
+obj/Debug/net8.0/login.AssemblyInfo.cs
 /obj/Debug/net8.0/login.AssemblyInfoInputs.cache
+/obj/Debug/net8.0/login.AssemblyInfo.cs
