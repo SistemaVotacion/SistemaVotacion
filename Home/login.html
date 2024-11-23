@@ -11,7 +11,7 @@
       }
 
       .login-form-container { 
-        background-color: #305479; 
+        background-color: #003366; 
         align-self: center; 
         display: flex; 
         margin-top: 238px; 
@@ -66,7 +66,7 @@
       }
 
       .verification-container {
-        background-color: rgb(48, 84, 121);
+        background-color: #003366;
         align-self: center;
         display: flex;
         margin-top: 355px;
@@ -95,7 +95,7 @@
 
       .confirmation-message {
         width: 636px;
-        background-color: #305479;
+        background-color: #003366;
         align-self: center;
         margin-top: 439px;
         max-width: 100%;
@@ -105,7 +105,7 @@
       }
 
       .error-container {
-        background-color: #305479;
+        background-color: #003366;
         align-self: center;
         display: flex;
         margin-top: 439px;
@@ -139,7 +139,7 @@
 
       .redirect-message {
         width: 636px;
-        background-color: rgb(48, 84, 121);
+        background-color: #003366;
         align-self: center;
         margin-top: 439px;
         max-width: 100%;
@@ -182,8 +182,8 @@
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
-        <input type="text" id="cedula" class="cedula-input" required aria-required="true" />
-        <button type="button" class="submit-button" id="button" onclick="cambiarPantallaACodigo()">Aceptar</button>
+        <input type="text" id="cedula" class="cedula-input" oninput="validacion()" />
+        <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
     </main>
 
@@ -209,15 +209,47 @@
     </footer>
 
     <script>
-   var bienvenida = document.getElementById('greeting');
-   var cedula, codigo;
+      var bienvenida = document.getElementById('greeting');
+      var cedula, codigo;
+      var cedula = document.getElementById('cedula').value;
+      console.log(cedula);
 
-   var cedula = document.getElementById('cedula').value;
-   console.log(cedula);
+      window.addEventListener('load', function() {
+        if (document.getElementById('cedula').value.trim() === ""){
+          document.getElementById("button").disabled = true;
+        }
+      });
 
-   console.log(bienvenida.innerHTML);
+      var boton = document.getElementById("button");
+
+      function botonDesactivado(){
+      boton.addEventListener('click', (event) => {
+            if (document.getElementById("button").disabled) {
+              document.getElementById('button').setAttribute('onclick', 'nulo()');   
+              alert('introducir cedula');
+            console.log(document.getElementById('button')); 
+            } else {
+              cambiarPantallaACodigo();
+            }
+        });
+      }
+
+      console.log(bienvenida.innerHTML);
+
+      function validacion(){
+        document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+        if (document.getElementById('cedula').value.trim() === ""){
+          document.getElementById('button').setAttribute('onclick', 'nulo()');    
+          alert('introducir cedula');
+        }
+      }
+
+      function nulo(){
+        console.log("a");
+      }
         
       function cambiarPantallaACodigo(){
+
         document.getElementById('greeting').innerText="";
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
@@ -234,7 +266,7 @@
 
           
           window.setTimeout(function(){
-            window.location.href = "Home.html";
+            window.location.href = "/PapeletaGit/Papeleta.html";
             }, 3000);
 
       }
