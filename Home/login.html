@@ -183,7 +183,7 @@
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
-        <input type="text" id="cedula" class="cedula-input" oninput="ValidacionVacio()" />
+        <input type="text" id="cedula" class="cedula-input" oninput="ValidacionVacioOInvalido()" />
         <div type="button" class="submit-button" id="button" onclick="botonDesactivado()">Aceptar</div>
       </form>
     </main>
@@ -212,50 +212,61 @@
     <script>
       var bienvenida = document.getElementById('greeting');
       var cedula, codigo;
-      var cedula = document.getElementById('cedula').value;
+      var cedula = document.getElementById('cedula').innerHTML;
+      var boton = document.getElementById("button");
       console.log(cedula);
 
       window.addEventListener('load', function() {
         console.log("cargo");
 
-        if (document.getElementById('cedula').value.trim() === ""){
+         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById("button").disabled = true;
           console.log("desactivar boton por no tener entrada de texto");
 
-        }
+        }else {
+          console.log("activar boton por tener entrada de texto");
+
+        } 
       });
 
-      var boton = document.getElementById("button");
 
       function botonDesactivado(){
-      boton.addEventListener('click', (event) => {
+     const boton = document.getElementById("button");
+     
         console.log("botonDesactivado");
 
             if (document.getElementById("button").disabled) {
-              document.getElementById('button').setAttribute('onclick', 'nuloa()');   
-              alert('introducir cedula');
+              alert('introducir cedulaC');
               console.log("se desactivo boton");
             console.log(document.getElementById('button')); 
             } else {
-              cambiarPantallaACodigo();
-              console.log("no se desactivo boton");
+              ValidacionVacioOInvalido();
+              console.log("se habilito boton por entrada de texto");
 
             }
-        });
+        
       }
 
-      function ValidacionVacio(){
-        console.log("ValidacionVacioLlamado");
+      function ValidacionVacioOInvalido(){
+        console.log("ValidacionVacioOInvalidoLlamado");
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
         const pattern = /^[a-zA-Z0-9]{1,2}-\d{1,4}-\d{1,4}$/;
-        console.log("ValidacionVacioNoFunciono_NoVacio");
+        console.log("ValidacionVacioOInvalidoFunciono_NoVacio");
         const resultado = pattern.test(document.getElementById('cedula').value);
-        console.log("ValidacionVacioNoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
+        console.log("ValidacionVacioOInvalidoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
 
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById('button').setAttribute('onclick', 'nulo()');    
-          alert('introducir cedula');
-          console.log("ValidacionVacioFunciono");
+          alert('introducir cedulaV');
+          console.log("ValidacionVacioOInvalidoFunciono_Vacio");
+        }
+        
+        if (resultado){
+          console.log("ValidacionVacioOInvalidoFunciono_EntradaValida");
+          cambiarPantallaACodigo();
+        }else{
+          alert('Cedula no valida. Por favor intente de nuevo.');
+
         }
         return resultado
 
@@ -263,6 +274,8 @@
 
       function nulo(){
         console.log("nulo");
+        alert('introducir cedulaN');
+
       }
 
       function nuloa(){
