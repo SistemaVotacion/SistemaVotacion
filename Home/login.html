@@ -63,6 +63,7 @@
         color: #000; 
         text-align: center; 
         padding: 23px 36px;
+        cursor: pointer;
       }
 
       .verification-container {
@@ -215,9 +216,12 @@
       console.log(cedula);
 
       window.addEventListener('load', function() {
+        console.log("cargo");
+
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById("button").disabled = true;
-          console.log("cargo");
+          console.log("desactivar boton por no tener entrada de texto");
+
         }
       });
 
@@ -225,6 +229,8 @@
 
       function botonDesactivado(){
       boton.addEventListener('click', (event) => {
+        console.log("botonDesactivado");
+
             if (document.getElementById("button").disabled) {
               document.getElementById('button').setAttribute('onclick', 'nuloa()');   
               alert('introducir cedula');
@@ -241,7 +247,7 @@
       function ValidacionVacio(){
         console.log("ValidacionVacioLlamado");
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
-        const pattern = /^[a-zA-Z0-9]{1,2}-\d{0,4}-\d{0,4}$/;
+        const pattern = /^[a-zA-Z0-9]{1,2}-\d{1,4}-\d{1,4}$/;
         console.log("ValidacionVacioNoFunciono_NoVacio");
         const resultado = pattern.test(document.getElementById('cedula').value);
         console.log("ValidacionVacioNoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
