@@ -271,7 +271,6 @@
           alert('Cedula no valida. Por favor intente de nuevo.');
 
         }
-        return resultado
 
       }
 
@@ -290,8 +289,7 @@
         document.getElementById('greeting').innerText="";
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
-        document.getElementById('button').setAttribute('onclick', 'cambiarPantallaAPapeleta()');    
-        document.getElementById('cedula').setAttribute('oninput', 'ValidacionCodigo()');    
+        document.getElementById('button').setAttribute('onclick', 'ValidacionCodigo()');    
         document.getElementById('cedula').value = "";
         var codigo = document.getElementById('cedula').value;
         console.log("cambiarPantallaACodigo");
@@ -306,7 +304,7 @@
           console.log("cambiarPantallaAPapeleta");
 
           window.setTimeout(function(){
-            window.location.href = "/PapeletaGit/Papeleta.html";
+            window.location.href = "PapeletaGit/papeleta.html";
             }, 3000);
 
       }
@@ -314,6 +312,7 @@
       function ValidacionCodigo(){
         console.log("ValidacionCodigoLlamado");
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+        const resultado = document.getElementById('cedula').value.trim();
         console.log("ValidacionCodigoFunciono_NoVacio");
         console.log("ValidacionCodigoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
 
@@ -321,16 +320,13 @@
           document.getElementById('button').setAttribute('onclick', 'nulo()');    
           alert('introducir codigo');
           console.log("ValidacionCodigoFunciono_Vacio");
-        }
-        
-        if (resultado){
+        } else if (document.getElementById('cedula').value !=""){
           console.log("ValidacionCodigoFunciono_EntradaValida");
-          cambiarPantallaACodigo();
+          cambiarPantallaAPapeleta();
         }else{
           alert('Cedula no valida. Por favor intente de nuevo.');
 
         }
-        return resultado
 
       }
 
