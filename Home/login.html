@@ -175,7 +175,7 @@
 
     <main class="login-form-container">
       <form class="login-form">
-        <h1 id="greeting">Buenos dias</h1>
+        <h1 id="greeting" class="greeting">Buenos dias</h1>
         <p class="instructions">
           Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
           Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
@@ -226,7 +226,9 @@
    console.log(bienvenida.innerHTML);
         
       function cambiarPantallaACodigo(){
-        
+        document.getElementById('greeting').innerText="";
+
+        console.log('asdfasdf');
     
       }
 
