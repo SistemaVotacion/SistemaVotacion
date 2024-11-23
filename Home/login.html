@@ -11,7 +11,7 @@
       }
 
       .login-form-container { 
-        background-color: #305479; 
+        background-color: #003366; 
         align-self: center; 
         display: flex; 
         margin-top: 238px; 
@@ -66,7 +66,7 @@
       }
 
       .verification-container {
-        background-color: rgb(48, 84, 121);
+        background-color: #003366;
         align-self: center;
         display: flex;
         margin-top: 355px;
@@ -95,7 +95,7 @@
 
       .confirmation-message {
         width: 636px;
-        background-color: #305479;
+        background-color: #003366;
         align-self: center;
         margin-top: 439px;
         max-width: 100%;
@@ -105,7 +105,7 @@
       }
 
       .error-container {
-        background-color: #305479;
+        background-color: #003366;
         align-self: center;
         display: flex;
         margin-top: 439px;
@@ -139,7 +139,7 @@
 
       .redirect-message {
         width: 636px;
-        background-color: rgb(48, 84, 121);
+        background-color: #003366;
         align-self: center;
         margin-top: 439px;
         max-width: 100%;
@@ -209,17 +209,24 @@
     </footer>
 
     <script>
-   var bienvenida = document.getElementById('greeting');
-   var cedula, codigo;
+      var bienvenida = document.getElementById('greeting');
+      var cedula, codigo;
+      var cedula = document.getElementById('cedula').value;
+      console.log(cedula);
 
-   var cedula = document.getElementById('cedula').value;
-   console.log(cedula);
-   validacion();
+      window.addEventListener('load', function() {
+        if (document.getElementById('cedula').value.trim() === ""){
+          document.getElementById("button").disabled = true;
+        }
+      });
 
-   console.log(bienvenida.innerHTML);
+      console.log(bienvenida.innerHTML);
 
       function validacion(){
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+        if (document.getElementById('cedula').value.trim() === ""){
+          alert('introducir cedula');
+        }
       }
         
       function cambiarPantallaACodigo(){
