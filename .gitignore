@@ -25,10 +25,3 @@ Home/PapeletaGit/f.html
 /APIs/ApiPapeleta/obj/ApiPapeleta.csproj.nuget.g.props
 /APIs/ApiPapeleta/obj/project.assets.json
 /APIs/ApiPapeleta/obj/project.nuget.cache
-APIs/ApiPapeleta/obj/Debug/net8.0/ApiPapeleta.csproj.AssemblyReference.cache
-APIs/ApiPapeleta/obj/Release/net8.0/.NETCoreApp,Version=v8.0.AssemblyAttributes.cs
-.gitignore
-APIs/ApiPapeleta/obj/Release/net8.0/ApiPapeleta.AssemblyInfoInputs.cache
-APIs/ApiPapeleta/obj/Release/net8.0/ApiPapeleta.assets.cache
-APIs/ApiPapeleta/obj/Release/net8.0/ApiPapeleta.GeneratedMSBuildEditorConfig.editorconfig
-APIs/ApiPapeleta/obj/Release/net8.0/ApiPapeleta.GlobalUsings.g.cs
