@@ -1,3 +1,6 @@
+using API_VotoTotal.Data;
+using Microsoft.EntityFrameworkCore;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -7,6 +10,12 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
+builder.Services.AddDbContext<VotoTotalContext>(options =>
+  options.UseSqlServer(builder.Configuration.GetConnectionString("VotoTotalContext")));
+
+builder.Services.AddDatabaseDeveloperPageExceptionFilter();
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -14,6 +23,16 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
+    app.UseDeveloperExceptionPage();
+    app.UseMigrationsEndPoint();
+}
+
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+
+    var context = services.GetRequiredService<VotoTotalContext>();
+    DbInitializer.Initialize(context);
 }
 
 app.UseHttpsRedirection();
