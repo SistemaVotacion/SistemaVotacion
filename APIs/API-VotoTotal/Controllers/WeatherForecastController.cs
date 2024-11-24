@@ -35,7 +35,7 @@ namespace API_VotoTotal.Controllers
         [HttpGet("VotosTotales")]
         public async Task<IActionResult> VotosTotales()
         {
-            var VotosTotales = await _context.VotosTotales.ToListAsync();
+            var VotosTotales = await _context.VotosTotales.FromSql($"EXEC VerTotalVotos").ToListAsync();
             return Ok(VotosTotales);
         }
 
@@ -43,7 +43,7 @@ namespace API_VotoTotal.Controllers
         [HttpGet("Provincias")]
         public async Task<IActionResult> Provincias()
         {
-            var Provincias = await _context.Provincias.ToListAsync();
+            var Provincias = await _context.Provincias.FromSql($"EXEC VerVotosPorProvincia").ToListAsync();
             return Ok(Provincias);
         }
 
@@ -51,7 +51,7 @@ namespace API_VotoTotal.Controllers
         [HttpGet("Candidatos")]
         public async Task<IActionResult> Candidatos()
         {
-            var Candidatos = await _context.Candidatos.ToListAsync();
+            var Candidatos = await _context.Candidatos.FromSql($"EXEC VerVotosPorCandidato").ToListAsync();
             return Ok(Candidatos);
         }
 
