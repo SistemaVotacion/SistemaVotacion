@@ -1,4 +1,8 @@
 create database RegistroDeVoto
+go
+
+use RegistroDeVoto
+go
 
 CREATE TABLE candidatos (
   candidato_id int  PRIMARY KEY NOT NULL,
@@ -91,7 +95,7 @@ ALTER TABLE votos
 (3, 'Chiriquí'),
 (1, 'Veraguas'),
 (2, 'Los Santos');
-
+go
 
 --Procedimiento para almacenar votos
 CREATE PROCEDURE RegistrarVoto
@@ -105,11 +109,13 @@ BEGIN
 
   PRINT 'Voto registrado exitosamente.';
 END;
+go
 
 --Llamada de ejemplo 
 EXEC RegistrarVoto 
   @CandidatoId = 1, 
   @Provincia = 'Panamá';
+  go
 
   --Procedimiento para Ver el Total de Votos
   CREATE PROCEDURE VerTotalVotos
@@ -121,8 +127,10 @@ BEGIN
   FROM 
       votos;
 END;
+go
 --Llamada de ejemplo 
 EXEC VerTotalVotos;
+go
 
 --Procedimiento para ver votos por candidatos
 CREATE PROCEDURE VerVotosPorCandidato
@@ -141,9 +149,11 @@ BEGIN
   ORDER BY 
       Total_Votos DESC;
 END;
+go
 
 --Llamada de ejemplo 
 EXEC VerVotosPorCandidato;
+go
 
 --Procedimiento para ver votos por candidato especifico 
 CREATE PROCEDURE VerVotosPorCandidatoId
@@ -163,9 +173,11 @@ BEGIN
   GROUP BY 
       c.candidato_id, c.nombre;
 END;
+go
 
 --Llamada de ejemplo 
 EXEC VerVotosPorCandidatoId @CandidatoId = 1;
+go
 
 --Procedimientos para ver votos por provincia 
 CREATE PROCEDURE VerVotosPorProvincia
@@ -182,9 +194,10 @@ BEGIN
   ORDER BY 
       Total_Votos DESC;
 END;
+go
 --Llamada de ejemplo
 EXEC VerVotosPorProvincia;
-
+go
 --Procedimiento para ver los votos por provincia especifica
 CREATE PROCEDURE VerVotosPorProvinciaId
   @IdProvincia INT
@@ -203,5 +216,7 @@ BEGIN
   GROUP BY 
       p.id_provincia, p.nombre;
 END;
+go
 --Llamada de ejemplo 
 EXEC VerVotosPorProvinciaId @IdProvincia = 8;
+go
