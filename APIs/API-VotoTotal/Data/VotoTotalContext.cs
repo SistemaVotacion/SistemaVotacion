@@ -28,7 +28,7 @@ namespace API_VotoTotal.Data
            eb =>
            {
                eb.HasNoKey();
-               eb.ToView("View_BlogPostCounts");
+              // eb.ToView("View_BlogPostCounts");
                eb.Property(v => v.VotosTodosCandidatos).HasColumnName("Name");
            });
 
