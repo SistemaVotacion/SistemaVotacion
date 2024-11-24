@@ -20,7 +20,7 @@ namespace API_VotoTotal.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Candidatos>().ToTable("Candidatos");
-            modelBuilder.Entity<Provincia>().ToTable("Provincia");
+            modelBuilder.Entity<Provincia>().ToTable("Provincias");
             modelBuilder.Entity<VotosTotales>().ToTable("VotosTotales");
 
             modelBuilder
@@ -29,7 +29,7 @@ namespace API_VotoTotal.Data
            {
                eb.HasNoKey();
               // eb.ToView("View_BlogPostCounts");
-               eb.Property(v => v.VotosTodosCandidatos).HasColumnName("Name");
+               eb.Property(v => v.VotosTodosCandidatos).HasColumnName("voto_id");
            });
 
         }

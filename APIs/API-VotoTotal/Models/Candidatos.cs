@@ -1,10 +1,15 @@
-﻿namespace API_VotoTotal.Models
+﻿using Microsoft.EntityFrameworkCore;
+
+namespace API_VotoTotal.Models
 {
+    [PrimaryKey(nameof(candidato_id))]
+
     public class Candidatos
     {
-        public string ID { get; set; }
 
-        public string Candidato { get; set; }
+        public string candidato_id { get; set; }
+
+        public string nombre { get; set; }
         public int VotosCandidato { get; set; }
        
 
