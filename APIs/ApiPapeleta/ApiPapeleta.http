@@ -1,4 +1,4 @@
-@ApiPapeleta_HostAddress = http://localhost:5277
+@ApiPapeleta_HostAddress = http://localhost:5011
 
 GET {{ApiPapeleta_HostAddress}}/weatherforecast/
 Accept: application/json
