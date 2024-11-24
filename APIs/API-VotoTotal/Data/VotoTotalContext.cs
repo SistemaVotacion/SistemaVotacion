@@ -6,6 +6,7 @@ namespace API_VotoTotal.Data
 
     public class VotoTotalContext : DbContext
     {
+
         public VotoTotalContext(DbContextOptions<VotoTotalContext> options) : base(options)
         {
         }

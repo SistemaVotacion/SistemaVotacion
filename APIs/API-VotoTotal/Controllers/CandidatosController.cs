@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using API_VotoTotal.Data;
 using API_VotoTotal.Models;
+using Microsoft.Extensions.Options;
 
 namespace API_VotoTotal.Controllers
 {
@@ -21,41 +22,29 @@ namespace API_VotoTotal.Controllers
             _context = context;
         }
 
+
         // GET: Candidatos
-        [HttpGet(Name = "GetIndex")]
-        public IEnumerable<Candidatos> Get()
+        [HttpGet(Name = "GetVotosTotales")]
+        public async Task<IActionResult> VotosTotales()
         {
-            return Enumerable.Range(1, 5).Select(index => new Candidatos
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-            })
-            .ToArray();
+            var VotosTotales = await _context.VotosTotales.ToListAsync();
+            return Ok(VotosTotales);
         }
 
         // GET: Candidatos/Details/5
-        [HttpGet(Name = "GetDetails")]
-        public IEnumerable<Provincia> Details() { 
-
-            return Enumerable.Range(1, 5).Select(index => new Provincia
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-            })
-            .ToArray();
+        [HttpGet(Name = "GetProvincias")]
+        public async Task<IActionResult> Provincias()
+        {
+            var Provincias = await _context.Provincias.ToListAsync();
+            return Ok(Provincias);
         }
 
         // GET: Candidatos/Edit/5
-        [HttpGet]
-        public IEnumerable<VotosTotales> Edit()
+        [HttpGet(Name = "GetCandidatos")]
+        public async Task<IActionResult> Candidatos()
         {
-          
-            return Enumerable.Range(1, 5).Select(index => new VotosTotales
-            {
-                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
-                TemperatureC = Random.Shared.Next(-20, 55),
-            })
-            .ToArray();
+            var Candidatos = await _context.Candidatos.ToListAsync();
+            return Ok(Candidatos);
         }
 
         private bool CandidatosExists(string id)
