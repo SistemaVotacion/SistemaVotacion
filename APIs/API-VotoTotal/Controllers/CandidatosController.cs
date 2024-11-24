@@ -10,7 +10,9 @@ using API_VotoTotal.Models;
 
 namespace API_VotoTotal.Controllers
 {
-    public class CandidatosController : Controller
+    [ApiController]
+    [Route("[CandidatosController]")]
+    public class CandidatosController : ControllerBase
     {
         private readonly VotoTotalContext _context;
 
@@ -20,133 +22,40 @@ namespace API_VotoTotal.Controllers
         }
 
         // GET: Candidatos
-        public async Task<IActionResult> Index()
+        [HttpGet(Name = "GetIndex")]
+        public IEnumerable<Candidatos> Get()
         {
-            return View(await _context.Candidatos.ToListAsync());
+            return Enumerable.Range(1, 5).Select(index => new Candidatos
+            {
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+            })
+            .ToArray();
         }
 
         // GET: Candidatos/Details/5
-        public async Task<IActionResult> Details(string id)
-        {
-            if (id == null)
+        [HttpGet(Name = "GetDetails")]
+        public IEnumerable<Provincia> Details() { 
+
+            return Enumerable.Range(1, 5).Select(index => new Provincia
             {
-                return NotFound();
-            }
-
-            var candidatos = await _context.Candidatos
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (candidatos == null)
-            {
-                return NotFound();
-            }
-
-            return View(candidatos);
-        }
-
-        // GET: Candidatos/Create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Candidatos/Create
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,Candidato,VotosCandidato")] Candidatos candidatos)
-        {
-            if (ModelState.IsValid)
-            {
-                _context.Add(candidatos);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
-            }
-            return View(candidatos);
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+            })
+            .ToArray();
         }
 
         // GET: Candidatos/Edit/5
-        public async Task<IActionResult> Edit(string id)
+        [HttpGet]
+        public IEnumerable<VotosTotales> Edit()
         {
-            if (id == null)
+          
+            return Enumerable.Range(1, 5).Select(index => new VotosTotales
             {
-                return NotFound();
-            }
-
-            var candidatos = await _context.Candidatos.FindAsync(id);
-            if (candidatos == null)
-            {
-                return NotFound();
-            }
-            return View(candidatos);
-        }
-
-        // POST: Candidatos/Edit/5
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(string id, [Bind("ID,Candidato,VotosCandidato")] Candidatos candidatos)
-        {
-            if (id != candidatos.ID)
-            {
-                return NotFound();
-            }
-
-            if (ModelState.IsValid)
-            {
-                try
-                {
-                    _context.Update(candidatos);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!CandidatosExists(candidatos.ID))
-                    {
-                        return NotFound();
-                    }
-                    else
-                    {
-                        throw;
-                    }
-                }
-                return RedirectToAction(nameof(Index));
-            }
-            return View(candidatos);
-        }
-
-        // GET: Candidatos/Delete/5
-        public async Task<IActionResult> Delete(string id)
-        {
-            if (id == null)
-            {
-                return NotFound();
-            }
-
-            var candidatos = await _context.Candidatos
-                .FirstOrDefaultAsync(m => m.ID == id);
-            if (candidatos == null)
-            {
-                return NotFound();
-            }
-
-            return View(candidatos);
-        }
-
-        // POST: Candidatos/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(string id)
-        {
-            var candidatos = await _context.Candidatos.FindAsync(id);
-            if (candidatos != null)
-            {
-                _context.Candidatos.Remove(candidatos);
-            }
-
-            await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+                Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                TemperatureC = Random.Shared.Next(-20, 55),
+            })
+            .ToArray();
         }
 
         private bool CandidatosExists(string id)
