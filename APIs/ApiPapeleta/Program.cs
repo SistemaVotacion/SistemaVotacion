@@ -1,15 +1,4 @@
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore;
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.DependencyInjection;
-using ApiPapeleta.Models;
-using ApiPapeleta.ContosoUniversity;
+var builder = WebApplication.CreateBuilder(args);
 
 namespace ContosoUniversity
 {
@@ -34,10 +23,7 @@ namespace ContosoUniversity
                 }
             }
 
-
-
-            host.Run();
-        }
+app.UseHttpsRedirection();
 
         public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
             WebHost.CreateDefaultBuilder(args)
