@@ -1,10 +1,13 @@
-﻿namespace API_VotoTotal.Models
+﻿using Microsoft.EntityFrameworkCore;
+using Mono.TextTemplating;
+
+namespace API_VotoTotal.Models
 {
+    [Keyless]
+
     public class Provincia
     {
-        public string ID { get; set; }
-
-        public string NombreProvincia { get; set; }
+        public string nombre { get; set; }
         public int VotosProvincia { get; set; }
 
     }
