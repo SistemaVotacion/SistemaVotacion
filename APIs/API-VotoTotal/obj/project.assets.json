@@ -428,23 +428,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ivan\\.nuget\\packages\\": {},
+    "C:\\Users\\pancho\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ivan\\source\\repos\\SistemaVotacion\\APIs\\API-VotoTotal\\API-VotoTotal.csproj",
+      "projectUniqueName": "C:\\Users\\pancho\\source\\repos\\login\\APIs\\API-VotoTotal\\API-VotoTotal.csproj",
       "projectName": "API-VotoTotal",
-      "projectPath": "C:\\Users\\Ivan\\source\\repos\\SistemaVotacion\\APIs\\API-VotoTotal\\API-VotoTotal.csproj",
-      "packagesPath": "C:\\Users\\Ivan\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ivan\\source\\repos\\SistemaVotacion\\APIs\\API-VotoTotal\\obj\\",
+      "projectPath": "C:\\Users\\pancho\\source\\repos\\login\\APIs\\API-VotoTotal\\API-VotoTotal.csproj",
+      "packagesPath": "C:\\Users\\pancho\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\pancho\\source\\repos\\login\\APIs\\API-VotoTotal\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Ivan\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\pancho\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
