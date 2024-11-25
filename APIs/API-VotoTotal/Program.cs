@@ -1,7 +1,18 @@
 using API_VotoTotal.Data;
 using Microsoft.EntityFrameworkCore;
 
+var MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
 var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: MyAllowSpecificOrigins,
+                      policy =>
+                      {
+                          policy.AllowAnyOrigin();// solo para prueba, hay que cambiarlo para que solo sea nuestra pagina web
+                                                  // https://learn.microsoft.com/en-us/aspnet/core/security/cors?view=aspnetcore-6.0
+                      });
+});
 
 // Add services to the container.
 
@@ -35,6 +46,8 @@ using (var scope = app.Services.CreateScope())
 }
 
 app.UseHttpsRedirection();
+
+app.UseCors(MyAllowSpecificOrigins);
 
 app.UseAuthorization();
 
