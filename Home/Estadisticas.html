@@ -176,9 +176,9 @@
     </footer>
 
     <script>
-        let dataset = []; // To store the fetched data
+        let dataset = [];//Para almacenar datos
 
-        // Function to populate the dropdown menu
+        //Poner opciones en dropdown
         function populateDropdown(data) {
             const dropdown = document.getElementById('provincia');
             data.forEach(item => {
@@ -189,7 +189,7 @@
             });
         }
 
-        // Function to display selected data
+        // Mostrar datos seleccionados
         function displayData(optionValue) {
             const resultDiv = document.getElementById('resultadoProvincia');
             const selectedItem = dataset.find(item => item.nombre == optionValue);
@@ -198,7 +198,7 @@
                 // Clear previous results
                 resultDiv.innerHTML = '';
 
-                // Display selected data
+                //Mostrar datos
                 const content = `
                     <div class="data-item">
                         <span>Provincia:</span> ${selectedItem.nombre}
@@ -213,9 +213,9 @@
             }
         }
 
-        // Fetch the entire dataset on page load
+        // Cuando carga la pagina
         window.addEventListener('load', function() {
-            const apiUrl = 'https://localhost:7157/WeatherForecast/Provincias/'; // Replace with your API endpoint
+            const apiUrl = 'https://localhost:7157/WeatherForecast/Provincias/'; 
             
             fetch(apiUrl)
                 .then(response => {
@@ -225,17 +225,16 @@
                     return response.json();
                 })
                 .then(data => {
-                    dataset = data; // Store the fetched data
-                    populateDropdown(dataset); // Populate dropdown with options
-                    //displayData("Panamá"); // Automatically display data for the first option
-                   // document.getElementById('provincia').value = "Panamá"; // Set dropdown to first option
+                    dataset = data; // Guardar datos
+                    populateDropdown(dataset); // Poner opciones en dropdown
+                    
                 })
                 .catch(error => {
                     document.getElementById('result').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
                 });
         });
 
-        // Fetch data when the OK button is clicked
+        //Fetch cuando se presiona boton
         document.getElementById('provincia-btn').addEventListener('click', function() {
             const dropdown = document.getElementById('provincia');
             const value = dropdown.value;
@@ -246,9 +245,9 @@
 
 
 
-let datasetCandidato = []; // To store the fetched data
+let datasetCandidato = [];//Para almacenar datos
 
-// Function to populate the dropdown menu
+//Poner opciones en dropdown
 function populateDropdownCandidato(dataCandidato) {
     const dropdownCandidato = document.getElementById('candidato');
     dataCandidato.forEach(item => {
@@ -259,16 +258,16 @@ function populateDropdownCandidato(dataCandidato) {
     });
 }
 
-// Function to display selected data
+// Mostrar datos seleccionados
 function displayDataCandidato(optionValue) {
     const resultDivCandidato = document.getElementById('resultadoCandidato');
     const selectedItemCandidato = datasetCandidato.find(item => item.nombre == optionValue);
 
     if (selectedItemCandidato) {
-        // Clear previous results
+        // Limpiar datos
         resultDivCandidato.innerHTML = '';
 
-        // Display selected data
+        //Mostrar datos
         const contentCandidato = `
             <div class="data-item">
                 <span>Provincia:</span> ${selectedItemCandidato.nombre}
@@ -285,7 +284,7 @@ function displayDataCandidato(optionValue) {
 
 // Fetch the entire dataset on page load
 window.addEventListener('load', function() {
-    const apiUrlCandidato = 'https://localhost:7157/WeatherForecast/Candidatos/'; // Replace with your API endpoint
+    const apiUrlCandidato = 'https://localhost:7157/WeatherForecast/Candidatos/'; 
     
     fetch(apiUrlCandidato)
         .then(response => {
@@ -295,17 +294,15 @@ window.addEventListener('load', function() {
             return response.json();
         })
         .then(dataCandidato => {
-            datasetCandidato = dataCandidato; // Store the fetched data
-            populateDropdownCandidato(datasetCandidato); // Populate dropdown with options
-            //displayDataCandidato("Yasiel Gomez"); // Automatically display data for the first option
-            //document.getElementById('candidato').value = "Yasiel Gomez"; // Set dropdown to first option
+            datasetCandidato = dataCandidato; // Guardar datos
+            populateDropdownCandidato(datasetCandidato); // Poner opciones en dropdown
         })
         .catch(error => {
             document.getElementById('result').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
         });
 });
 
-// Fetch data when the OK button is clicked
+//Fetch cuando se presiona boton
 document.getElementById('candidato-btn').addEventListener('click', function() {
     const dropdownCandidato = document.getElementById('candidato');
     const valueCandidato = dropdownCandidato.value;
@@ -318,11 +315,11 @@ document.getElementById('candidato-btn').addEventListener('click', function() {
 
 
 
-let datasetConteoVotos = []; // To store the fetched data
+let datasetConteoVotos = [];//Para almacenar datos
 
-// Function to populate the dropdown menu
+//Poner opciones en dropdown
 
-// Function to display selected data
+// Mostrar datos seleccionados
 function displayDataConteoVotos() {
     const votosTodosCandidatosElegir = "votosTodosCandidatos";
     const resultDivConteoVotos = document.getElementById('conteoVotos');
@@ -352,7 +349,7 @@ function displayDataConteoVotos() {
 
 // Fetch the entire dataset on page load
 window.addEventListener('load', function() {
-    const apiUrlConteoVotos = 'https://localhost:7157/WeatherForecast/VotosTotales/'; // Replace with your API endpoint
+    const apiUrlConteoVotos = 'https://localhost:7157/WeatherForecast/VotosTotales/'; 
     
     fetch(apiUrlConteoVotos)
         .then(response => {
@@ -363,7 +360,7 @@ window.addEventListener('load', function() {
             return response.json();
         })
         .then(dataConteoVotos => {
-            datasetConteoVotos = dataConteoVotos; // Store the fetched data
+            datasetConteoVotos = dataConteoVotos; // Guardar datos
             displayDataConteoVotos();
         })
         .catch(error => {
