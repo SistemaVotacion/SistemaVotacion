@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sobre Nosotros</title>
+    <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
+    <style>
+
+        /* Contenido principal */
+        main {
+            flex: 1;
+            padding: 8rem 2rem 2rem; /* Espaciado considerando el header */
+        }
+
+        .team-container {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 2rem;
+        }
+
+        /* CSS para los miembros del grupo*/
+
+        .team-member {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 1rem;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+        }
+
+        .team-member p {
+            margin: 0.5rem 0;
+            font-size: 0.9rem;
+            color: #555;
+        }
+
+        .team-member .separator {
+            margin: 1rem 0;
+            height: 1px;
+            background-color: #ccc;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="header-left">
+            <img src="Logo.png" alt="Logo">
+        </div>
+
+        <div class="header-center">
+            <nav>
+                <a href="Home.html">Inicio</a>
+                <a href="SobreNosotros.html">Sobre Nosotros</a>
+                <a href="Estadisticas.html">Estadísticas</a>
+                <a href="login.html">Vota Aquí</a>
+            </nav>
+        <a href="https://google.com" target="_blank"><div class="search-icon">🔍</div></a>
+        </div>
+
+        <div class="header-right">
+            <a href="https://www.instagram.com" target="_blank"><div class="icon instagram"></div></a>
+            <a href="https://www.facebook.com" target="_blank"><div class="icon facebook"></div></a>
+            <a href="https://x.com/?lang=es" target="_blank"><div class="icon twitter"></div></a>
+        </div>
+    </header>
+
+    <main>
+        <section class="team-container">
+            <!-- Miembro del equipo 1 -->
+            <div class="team-member">
+                <img src="Franc.jpeg" alt="Foto de miembro">
+                <p><strong>Nombre:</strong>Francisco Herrera</p> 
+                <p><strong>Cédula:</strong> 8-1005-1990</p>
+                <p><strong>Carrera:</strong> Lic. Desarrollo y Gestion de Software</p>
+                <div class="separator"></div>
+                <p>He visto varios lenguajes de programacion como Java, Kotlin, 
+                    Javascript, y C Sharp. He tenido el privilegio de ver el 
+                desarrollo de este trabajo el cual fue 
+                interesante al ver que funcionara un frontend con un backend. </p>
+            </div>
+
+            <!-- Miembro del equipo 2 -->
+            <div class="team-member">
+                <img src="Nate.jpeg" alt="Foto de miembro">
+                <p><strong>Nombre:</strong> Nathan Carraso</p>
+                <p><strong>Cédula:</strong> 8-1010-606</p>
+                <p><strong>Carrera:</strong> Lic. Desarrollo y Gestion de Software</p>
+                <div class="separator"></div>
+                <p>Mi experiencia al tener que aplicar todos los conocimientos que había
+                     adquirido durante el semestre en un solo trabajo fue un reto, y más 
+                     con lo que no dominaba como lo es javascript, el manejo de como una
+                      web se conecta a una API y de como hacer consultas atraves del API. 
+                      Me gustó manejar los distintos estilos css de las distintas secciones 
+                      de la página y de como estos les dan vida a la página. Luego de
+                       finalizar este trabajo siento que tengo una base más sólida para 
+                       seguir aprendiendo y eso me emociona bastante.</p>
+            </div>
+
+            <!-- Miembro del equipo 3 -->
+            <div class="team-member">
+                <img src="Ivan.jpeg" alt="Foto de miembro">
+                <p><strong>Nombre:</strong> Iván Wu</p>
+                <p><strong>Cédula:</strong> 8-960-1362</p>
+                <p><strong>Carrera:</strong> Lic. Desarrollo y Gestion de Software</p>
+                <div class="separator"></div>
+                <p>Con mi experiencia como desarrollador principiante fue una experiencia única,
+                     ya que fue como una simulación de como seria crear una pagina web de verdad y
+                      teníamos que tener en consideración muchas cosas, ejemplo como el usuario lo 
+                      usaría, como uno lo utilizaría, como el color influenciaría el uso de la 
+                      pagina etc... y también el tener que coordinar con nuestros compañeros y 
+                      como compartir nuestras ideas. en mi caso tuve mucha suerte en este proyecto 
+                      que ellos son muy trabajadores y sin ellos este proyecto este pagina no 
+                      existiría.</p>
+            </div>
+
+            <!-- Miembro del equipo 4 -->
+            <div class="team-member">
+                <img src="Yiyi.jpg" alt="Foto de miembro">
+                <p><strong>Nombre:</strong> Yasiel Gómez</p>
+                <p><strong>Cédula:</strong> 8-1005-855</p>
+                <p><strong>Carrera:</strong> Lic. Desarrollo y Gestion de Software</p>
+                <div class="separator"></div>
+                <p>Como desarrolladora en un proyecto de una
+                     aplicación de votación electoral, tuve la 
+                     oportunidad de trabajar en la creación de la papeleta. Al principio,
+                      enfrentarme a la construcción de la API fue un desafío, ya que no
+                       estaba familiarizada con este aspecto. Sin embargo, a medida que 
+                       me sumergí en el proceso, fui adquiriendo nuevos conocimientos
+                        y habilidades. Esta experiencia, me brindó una gran satisfacción 
+                        al ver cómo mejoraba en un área que antes me resultaba desconocida.</p>
+
+            </div>
+        </section>
+        <br>
+        <br>
+        <br>
+        <br>
+    </main>
+
+    <footer>
+        Carrasco, Nathan; Gómez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
+    </footer>
+</body>
+</html>
