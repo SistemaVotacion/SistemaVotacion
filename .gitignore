@@ -5,3 +5,5 @@
 **/.vs
 **/bin/*
 **/obj/*
+/APIs/API-VotoTotal/obj/Debug/net8.0/API-VotoTotal.AssemblyInfo.cs
+/APIs/API-VotoTotal/obj/Debug/net8.0/API-VotoTotal.AssemblyInfoInputs.cache
