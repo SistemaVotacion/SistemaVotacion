@@ -56,7 +56,8 @@
 
     <script>
         let candidatoSeleccionado = null;
-        let provincia = "Panamá"
+        var items = ["Panamá", "Coclé", "Veraguas", "Los Santos", "Herrera", "Darién", "Chiriquí", "Colón", "Bocas del Toro"]
+        let provincia = items[Math.floor(Math.random()*items.length)];
         
         // Función para guardar la selección del candidato
         function guardarSeleccion(candidato) {
