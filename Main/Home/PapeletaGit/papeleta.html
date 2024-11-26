@@ -65,7 +65,7 @@
         }
 
         // Función para enviar el voto al backend
-        function enviarVoto() {
+        async function enviarVoto() {
             if (!candidatoSeleccionado) {
                 alert("Por favor, selecciona un candidato antes de enviar el voto.");
                 return;
@@ -79,7 +79,7 @@
             const myHeaders = new Headers();
             myHeaders.append("Content-Type", "application/json");
 
-            fetch('https://localhost:7154/Voting/vote', {
+            await fetch('https://localhost:7154/Voting/vote', {
                 method: 'POST',
                 body: JSON.stringify(datosVoto),
                 headers: myHeaders,

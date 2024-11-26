@@ -12,6 +12,7 @@ using System.Security.Cryptography;
 using System.Collections;
 using System.Numerics;
 using System.Text.Json;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 /*
  * Carrasco, Nathan
@@ -74,8 +75,17 @@ namespace login.Controllers
 
 
 
-            List<UserAuth> ReslultadoBaseDeDatos = new List<UserAuth>();
+            bool ReslultadoBaseDeDatos;
             ReslultadoBaseDeDatos = baseDeDatos.ObtenerDatos(result, resultCodigo);
+
+
+
+
+
+
+
+
+
 
 
 
@@ -119,13 +129,14 @@ namespace login.Controllers
             private static readonly List<UserAuth> Users = new List<UserAuth>();
 
             // Método para obtener todas las reservas existentes
-            internal List<UserAuth> ObtenerDatos(byte[] contraseniaVer, byte[] usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
+            internal bool ObtenerDatos(byte[] contraseniaVer, byte[] usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
                 //se usa una lista para poder retornar varias cosas a la vez
             {
                 try
                 {
-                    using (SqlConnection conexion = new SqlConnection(detallesConexion)) { 
-                    
+                    using (SqlConnection conexion = new SqlConnection(detallesConexion)) {
+                        await connection.OpenAsync();
+
 
                         SqlCommand command = new SqlCommand("CrearReserva", conexion);
                         command.CommandType = CommandType.StoredProcedure;
