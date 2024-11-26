@@ -73,6 +73,20 @@ nav a:hover {
     height: 30px;
     background-color: #ccc;
     border-radius: 50%;
+    background-size: cover; 
+    background-position: center; 
+}
+
+.icon.instagram {
+    background-image: url('Insta.png'); 
+}
+
+.icon.twitter {
+    background-image: url('X.png'); 
+}
+
+.icon.facebook {
+    background-image: url('Face.png'); 
 }
 
 footer {
@@ -81,4 +95,6 @@ footer {
     text-align: center;
     padding: 1rem;
     margin-top: 2rem;
+   width: 100%;
+
 }

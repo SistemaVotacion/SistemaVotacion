@@ -78,11 +78,14 @@
             background-color: #e0e0e0;
             border: 1px solid #ccc;
             border-radius: 5px;
-            height: 250px; /* Altura aumentada */
+            height: 250px; 
             display: flex;
             align-items: center;
             justify-content: center;
             transition: transform 0.3s ease, box-shadow 0.3s ease;
+            background-size: cover; 
+            background-position: center; 
+            background-repeat: no-repeat; 
         }
 
         .image-box:hover {
@@ -112,7 +115,7 @@
 <body>
     <header>
         <div class="header-left">
-            <img src="https://via.placeholder.com/100x50" alt="Logo">
+            <img src="Logo.png" alt="Logo">
         </div>
 
         <div class="header-center">
@@ -122,18 +125,18 @@
                 <a href="Estadisticas.html">Estadísticas</a>
                 <a href="login.html">Vota Aquí</a>
             </nav>
-            <a href="https://google.com" style="text-decoration: none;"><div class="search-icon">🔍</div></a>
+            <a href="https://google.com" target="_blank" style="text-decoration: none;"><div class="search-icon">🔍</div></a>
         </div>
 
         <div class="header-right">
-            <div class="icon"></div>
-            <div class="icon"></div>
-            <div class="icon"></div>
+            <a href="https://www.instagram.com" target="_blank"><div class="icon instagram"></div></a>
+            <a href="https://www.facebook.com" target="_blank"><div class="icon facebook"></div></a>
+            <a href="https://x.com/?lang=es" target="_blank"><div class="icon twitter"></div></a>
         </div>
     </header>
 
     <div class="hero">
-        <h1>lghj, mmlkjhj khjjkl,</h1>
+        <h1>Tu desición comienza ahora</h1>
         <a href="login.html" style="text-decoration: none;"><div id="vote-button">Vota aquí</div></a>
     </div>
 
@@ -144,21 +147,23 @@
     <main class="content">
         <div class="image-row">
             <div class="image-box-wrapper">
-                <div class="image-box">Imagen 1</div>
-                <p class="image-description">Descripción de la imagen 1</p>
+                <a href="https://www.prensa.com/politica/sistema-informatico-del-te-recibio-315-millones-de-ciberataques-el-dia-de-las-elecciones-generales/" v>
+                <div class="image-box" style="background-image: url(Noticia1.avif);"></div>
+                <p class="image-description">Sistema informático del TE recibió 31.5 millones de ciberataques el día de las elecciones generales</p></a>
             </div>
             <div class="image-box-wrapper">
-                <div class="image-box">Imagen 2</div>
-                <p class="image-description">Descripción de la imagen 2</p>
+                <a href="https://www.tribunal-electoral.gob.pa/estadisticas-de-inscritos-en-partidos-politicos/#" target="_blank">
+                <div class="image-box" style="background-image: url(Noticia2.webp)"></div>
+                <p class="image-description">Estadísticas de inscritos en partidos políticos</p></a>
             </div>
         </div>
 
         <div class="video-box">
-            <iframe width="1168" height="526" src="https://www.youtube.com/embed/Cc80iDuJqGQ" title="Elecciones en Panamá: 
+            <iframe width="1128" height="526" src="https://www.youtube.com/embed/Cc80iDuJqGQ" title="Elecciones en Panamá: 
             José Gabriel Carrizo reconoce virtual triunfo de José Raúl Mulino" 
             frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; 
             picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <p>Descripción del video</p>
+            <p>Elecciones Generales 2024</p>
         </div>
     </main>
 

@@ -1,0 +1,71 @@
+<style>
+
+
+
+.confirmation-container {
+  background-color: rgb(48, 84, 121);
+  align-self: center;
+  margin: 0 auto;
+  width: 1105px;
+  padding: 39px 43px 126px 21px;
+  color: rgb(255, 255, 255);
+  font-family: Inter, sans-serif;
+}
+
+.confirmation-message {
+  font-size: 20px;
+  align-self: center;
+  margin: 54px 0 -25px;
+}
+
+.emphasis-text {
+  font-size: 40px;
+}
+
+.footer {
+  background-color: rgb(48, 84, 121);
+  margin-top: 425px;
+  padding: 53px 70px;
+  color: rgb(255, 255, 255);
+  font: 300 24px Inter, sans-serif;
+}
+  
+  .confirmation-title {
+    max-width: 100%;
+    font-size: 64px;
+  }
+  
+  .confirmation-message {
+    max-width: 100%;
+    margin: 40px 0 10px;
+  }
+  
+  .footer {
+    max-width: 100%;
+    margin-top: 40px;
+    padding: 0 20px;
+  }
+}
+
+
+</style>
+
+
+
+<div class="confirmation-container">
+  <h1 class="confirmation-title">Su voto se ha registrado con exito.</h1>
+  <p class="confirmation-message">
+    <span class="emphasis-text">Gracias por ejercer el sufragio.</span>
+    <br /><br />
+    En unos segundos sera redirigido a la pagina de inicio. Gracias por decidir el futuro de la Nación.
+  </p>
+</div>
+
+<script>
+
+window.addEventListener('load', function() {
+	window.setTimeout(function(){
+		window.location.href = "../home.html";
+		}, 5000);
+})
+</script>
