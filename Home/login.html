@@ -2,6 +2,7 @@
 <html>
   <head>
     <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
+    <title>Login</title>
     <style>
       .login-container { 
         background-color: #fff; 
@@ -184,13 +185,15 @@
   <br>
   <br>
   <br>
+  <!-- Empieza login -->
+
   <div class="content">
     <section class="login-form-container">
       <form class="login-form">
         <h1 id="greeting" class="greeting">Buenos dias</h1>
         <p id="instructions" class="instructions">
           Por favor introduzca su cédula, para empezar el proceso de votación.<br /><br />
-          Luego se le pedira que tome una foto de su rostro para verificar su identidad.<br /><br />
+          Luego se le pedira que introduzca el codigo en el reverso de su cedula para verificar su identidad.<br /><br />
           Por favor, ayudenos a manter el secreto del voto al hacer este proceso en una area donde otras personas no puedan ver su pantalla. Gracias.
         </p>
         <label for="cedula" class="input-label" id="input-label">Cédula:</label>
@@ -229,6 +232,7 @@
       var boton = document.getElementById("button");
       console.log(cedula);
 
+      // apenas carga la pagina, desactivar boton por no haber entrada
       window.addEventListener('load', function() {
         console.log("cargo");
 
@@ -247,7 +251,7 @@
      const boton = document.getElementById("button");
      
         console.log("botonDesactivado");
-
+          //si el boton esta desactivado y hay entrada, revisar entrada
             if (document.getElementById("button").disabled) {
               if (document.getElementById('cedula').value != ""){
                 ValidacionVacioOInvalido();
@@ -264,19 +268,24 @@
       }
 
       function ValidacionVacioOInvalido(){
+        //validar entrada para que sea una cedula
         console.log("ValidacionVacioOInvalidoLlamado");
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
+        //usar regex para validar
         const pattern = /^[a-zA-Z0-9]{1,2}-\d{1,4}-\d{1,4}$/;
         console.log("ValidacionVacioOInvalidoFunciono_NoVacio");
+        //ejecutar validacion
         const resultado = pattern.test(document.getElementById('cedula').value);
         console.log("ValidacionVacioOInvalidoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
 
+        //si la cedula esta vacia
         if (document.getElementById('cedula').value.trim() === ""){
           document.getElementById('button').setAttribute('onclick', 'nulo()');    
           alert('introducir cedulaV');
           console.log("ValidacionVacioOInvalidoFunciono_Vacio");
         }
         
+        //si paso validacion
         if (resultado){
           console.log("ValidacionVacioOInvalidoFunciono_EntradaValida");
           cambiarPantallaACodigo();
@@ -299,6 +308,7 @@
         
       function cambiarPantallaACodigo(){
 
+        //cambiar contenido de la pagina 
         document.getElementById('greeting').innerText="";
         document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
         document.getElementById('input-label').innerText="Código";
@@ -309,13 +319,15 @@
       }
 
       function cambiarPantallaAPapeleta(){
+                //cambiar contenido de la pagina y redirgir
+
         document.getElementById('instructions').innerText="En unos segundos sera redirigido a la papeleta de votación. Gracias.";
           document.getElementById('input-label').remove();
           document.getElementById('cedula').remove();
           document.getElementById('button').remove();
 
           console.log("cambiarPantallaAPapeleta");
-
+        // redirigir despues de cierto tiempo
           window.setTimeout(function(){
             window.location.href = "PapeletaGit/papeleta.html";
             }, 3000);
@@ -323,7 +335,9 @@
       }
 
       function ValidacionCodigo(){
+        //validacion para el codigo en la cedula, solo revisa que no este vacio
         console.log("ValidacionCodigoLlamado");
+        //se desactiva el boton si la entrada esta vacia
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
         const resultado = document.getElementById('cedula').value.trim();
         console.log("ValidacionCodigoFunciono_NoVacio");

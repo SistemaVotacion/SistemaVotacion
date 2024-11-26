@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estadísticas</title>
     <link rel="stylesheet" type="text/css" href="EstiloGlobal.css">
+    <title>Estadisticas</title>
     <style>
         /* Contenedor principal */
         main {
@@ -99,24 +100,24 @@
     <!-- Header -->
     <header>
         <div class="header-left">
-            <img src="https://via.placeholder.com/100x50" alt="Logo">
-        </div>
+          <img src="Logo.png" alt="Logo">
+      </div>
 
-        <div class="header-center">
-            <nav>
-                <a href="Home.html">Inicio</a>
-                <a href="SobreNosotros.html">Sobre Nosotros</a>
-                <a href="Estadisticas.html" class="active">Estadísticas</a>
-                <a href="login.html">Vota Aquí</a>
-            </nav>
-            <a href="https://google.com"><div class="search-icon">🔍</div></a>
-        </div>
+      <div class="header-center">
+        <nav>
+            <a href="Home.html">Inicio</a>
+            <a href="SobreNosotros.html">Sobre Nosotros</a>
+            <a href="Estadisticas.html">Estadísticas</a>
+            <a href="login.html">Vota Aquí</a>
+        </nav>
+        <a href="https://google.com" target="_blank"><div class="search-icon">🔍</div></a>
+      </div>
 
-        <div class="header-right">
-            <div class="icon"></div>
-            <div class="icon"></div>
-            <div class="icon"></div>
-        </div>
+      <div class="header-right">
+            <a href="https://www.instagram.com" target="_blank"><div class="icon instagram"></div></a>
+            <a href="https://www.facebook.com" target="_blank"><div class="icon facebook"></div></a>
+            <a href="https://x.com/?lang=es" target="_blank"><div class="icon twitter"></div></a>
+      </div>
     </header>
 
     <!-- Contenido principal -->
@@ -124,7 +125,7 @@
         <!-- Contenedor de votos -->
         <div class="votes-container">
             <!-- Total de votos -->
-            <div class="total-votes">
+            <div class="total-votes" id="conteoVotos">
                 Total de votos: <span id="total-votos">0/100</span>
             </div>
 
@@ -135,10 +136,6 @@
                     <label for="provincia">Selecciona una provincia:</label>
                     <select id="provincia">
                         <option value="">-- Seleccionar --</option>
-                        <option value="panama">Panamá</option>
-                        <option value="colon">Colón</option>
-                        <option value="chiriqui">Chiriquí</option>
-                        <!-- Añadir más provincias aquí -->
                     </select>
                     <button id="provincia-btn">Aceptar</button>
                 </div>
@@ -151,9 +148,6 @@
                     <label for="candidato">Selecciona un candidato:</label>
                     <select id="candidato">
                         <option value="">-- Seleccionar --</option>
-                        <option value="candidato1">Candidato 1</option>
-                        <option value="candidato2">Candidato 2</option>
-                        <option value="candidato3">Candidato 3</option>
                         <!-- Añadir más candidatos aquí -->
                     </select>
                     <button id="candidato-btn">Aceptar</button>
@@ -166,13 +160,13 @@
             <!-- Resultados por provincia -->
             <div class="result-box">
                 <h2>Resultados por provincia</h2>
-                <p>Los resultados por provincia aparecerán aquí.</p>
+            <div id="resultadoProvincia"><p>Los resultados por provincia aparecerán aquí.</p></div>
             </div>
 
             <!-- Resultados por candidato -->
             <div class="result-box">
                 <h2>Resultados por candidato</h2>
-                <p>Los resultados por candidato aparecerán aquí.</p>
+                <div id="resultadoCandidato"><p>Los resultados por candidato aparecerán aquí.</p></div>
             </div>
         </div>
     </main>
@@ -182,7 +176,203 @@
         Carrasco, Nathan; Gómez, Yasiel; Herrera, Francisco; Wu, Iván. 2024
     </footer>
 
-    <script src="estadisticas.js"></script>
- 
+    <script>
+        //para votos por provincia
+
+        let dataset = [];//Para almacenar datos
+
+        //Poner opciones en dropdown
+        function populateDropdown(data) {
+            const dropdown = document.getElementById('provincia');
+            data.forEach(item => {
+                const option = document.createElement('option');
+                option.value = item.nombre; // Use the unique ID of the item
+                option.textContent = `${item.nombre}`;
+                dropdown.appendChild(option);
+            });
+        }
+
+        // Mostrar datos seleccionados
+        function displayData(optionValue) {
+            const resultDiv = document.getElementById('resultadoProvincia');
+            const selectedItem = dataset.find(item => item.nombre == optionValue);
+
+            if (selectedItem) {
+                // Clear previous results
+                resultDiv.innerHTML = '';
+
+                //Mostrar datos
+                const content = `
+                    <div class="data-item">
+                        <span>Provincia:</span> ${selectedItem.nombre}
+                    </div>
+                    <div class="data-item">
+                        <span>Votos:</span> ${selectedItem.votosProvincia}
+                    </div>
+                `;
+                resultDiv.innerHTML = content;
+            } else {
+                resultDiv.innerHTML = '<p>Los resultados por provincia aparecerán aquí.</p>';
+            }
+        }
+
+        // Cuando carga la pagina
+        window.addEventListener('load', function() {
+            const apiUrl = 'https://localhost:7157/WeatherForecast/Provincias/'; 
+            
+            fetch(apiUrl)
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    dataset = data; // Guardar datos
+                    populateDropdown(dataset); // Poner opciones en dropdown
+                    
+                })
+                .catch(error => {
+                    document.getElementById('result').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+                });
+        });
+
+        //Fetch cuando se presiona boton
+        document.getElementById('provincia-btn').addEventListener('click', function() {
+            const dropdown = document.getElementById('provincia');
+            const value = dropdown.value;
+            displayData(value);
+        });
+    
+/////////////////////////////////////////////////////////////
+
+//para votos por candidatos
+
+let datasetCandidato = [];//Para almacenar datos
+
+//Poner opciones en dropdown
+function populateDropdownCandidato(dataCandidato) {
+    const dropdownCandidato = document.getElementById('candidato');
+    dataCandidato.forEach(item => {
+        const optionCandidato = document.createElement('option');
+        optionCandidato.value = item.nombre; // Use the unique ID of the item
+        optionCandidato.textContent = `${item.nombre}`;
+        dropdownCandidato.appendChild(optionCandidato);
+    });
+}
+
+// Mostrar datos seleccionados
+function displayDataCandidato(optionValue) {
+    const resultDivCandidato = document.getElementById('resultadoCandidato');
+    const selectedItemCandidato = datasetCandidato.find(item => item.nombre == optionValue);
+
+    if (selectedItemCandidato) {
+        // Limpiar datos
+        resultDivCandidato.innerHTML = '';
+
+        //Mostrar datos
+        const contentCandidato = `
+            <div class="data-item">
+                <span>Provincia:</span> ${selectedItemCandidato.nombre}
+            </div>
+            <div class="data-item">
+                <span>Votos:</span> ${selectedItemCandidato.votosCandidato}
+            </div>
+        `;
+        resultDivCandidato.innerHTML = contentCandidato;
+    } else {
+        resultDivCandidato.innerHTML = '<p>Los resultados por candidato aparecerán aquí.</p>';
+    }
+}
+
+// Fetch the entire dataset on page load
+window.addEventListener('load', function() {
+    const apiUrlCandidato = 'https://localhost:7157/WeatherForecast/Candidatos/'; 
+    
+    fetch(apiUrlCandidato)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(dataCandidato => {
+            datasetCandidato = dataCandidato; // Guardar datos
+            populateDropdownCandidato(datasetCandidato); // Poner opciones en dropdown
+        })
+        .catch(error => {
+            document.getElementById('result').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+        });
+});
+
+//Fetch cuando se presiona boton
+document.getElementById('candidato-btn').addEventListener('click', function() {
+    const dropdownCandidato = document.getElementById('candidato');
+    const valueCandidato = dropdownCandidato.value;
+    displayDataCandidato(valueCandidato);
+});
+
+
+/////////////////////////////////////////////////////////////
+
+
+//para contar votos
+
+
+let datasetConteoVotos = [];//Para almacenar datos
+
+//Poner opciones en dropdown
+
+// Mostrar datos seleccionados
+function displayDataConteoVotos() {
+    const votosTodosCandidatosElegir = "votosTodosCandidatos";
+    const resultDivConteoVotos = document.getElementById('conteoVotos');
+    console.log(datasetConteoVotos);
+
+    console.log('deapi');
+
+    var datasetConteoVotosInterno =  JSON.stringify(datasetConteoVotos);
+    console.log(datasetConteoVotosInterno)
+    console.log('deapi');
+
+    datasetConteoVotosInterno = datasetConteoVotosInterno.substring(datasetConteoVotosInterno.indexOf(":") + 1);
+    console.log(datasetConteoVotosInterno)
+    datasetConteoVotosInterno = datasetConteoVotosInterno.substring(0, datasetConteoVotosInterno.length - 2);
+    console.log(datasetConteoVotosInterno)
+
+
+    if (datasetConteoVotos) {
+        // Clear previous results
+        resultDivConteoVotos.innerHTML = '';
+
+        resultDivConteoVotos.innerHTML = `Total de votos: <span id="total-votos">${datasetConteoVotosInterno}/100</span> `;
+    } else {
+        resultDivConteoVotos.innerHTML = '<span style="color: red;">No data found for the selected option.</span>';
+    }
+}
+
+// Fetch the entire dataset on page load
+window.addEventListener('load', function() {
+    const apiUrlConteoVotos = 'https://localhost:7157/WeatherForecast/VotosTotales/'; 
+    
+    fetch(apiUrlConteoVotos)
+        .then(response => {
+            if (!response.ok) {
+                console.log(response + 'fs')
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(dataConteoVotos => {
+            datasetConteoVotos = dataConteoVotos; // Guardar datos
+            displayDataConteoVotos();
+        })
+        .catch(error => {
+            document.getElementById('conteoVotos').innerHTML = `<span style="color: red;">Error: ${error.message}</span>`;
+        });
+});
+
+</script>
+
 </body>
 </html>
