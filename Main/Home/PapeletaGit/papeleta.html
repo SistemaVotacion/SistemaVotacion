@@ -19,7 +19,7 @@
                 </div>
                 <div class="votar">
                     <input type="radio" name="candidato" value="Candidato 1" id="candidato1">
-                    <label for="candidato1" onclick="guardarSeleccion('Candidato 1')">Votar</label>
+                    <label for="candidato1" onclick="guardarSeleccion(1)">Votar</label>
                 </div>
             </div>
 
@@ -32,7 +32,7 @@
                 </div>
                 <div class="votar">
                     <input type="radio" name="candidato" value="Candidato 2" id="candidato2">
-                    <label for="candidato2" onclick="guardarSeleccion('Candidato 2')">Votar</label>
+                    <label for="candidato2" onclick="guardarSeleccion(2)">Votar</label>
                 </div>
             </div>
 
@@ -45,7 +45,7 @@
                 </div>
                 <div class="votar">
                     <input type="radio" name="candidato" value="Candidato 3" id="candidato3">
-                    <label for="candidato3" onclick="guardarSeleccion('Candidato 3')">Votar</label>
+                    <label for="candidato3" onclick="guardarSeleccion(3)">Votar</label>
                 </div>
             </div>
 
@@ -56,6 +56,7 @@
 
     <script>
         let candidatoSeleccionado = null;
+        let provincia = "Panamá"
         
         // Función para guardar la selección del candidato
         function guardarSeleccion(candidato) {
@@ -71,34 +72,32 @@
             }
 
             const datosVoto = {
-                candidato: candidatoSeleccionado
+                userId: provincia,
+                candidateId: candidatoSeleccionado
             };
 
-            fetch('https://localhost:5001/api/votos', {
+            const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            fetch('https://localhost:7154/Voting/vote', {
                 method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(datosVoto)
+                body: JSON.stringify(datosVoto),
+                headers: myHeaders,
             })
             .then(response => {
                 if (response.ok) {
                     alert("¡Voto enviado con éxito! Sera redirigido a la pagina de inicio.");
                     candidatoSeleccionado = null;
                     document.getElementById('votacion-form').reset();
-                    window.location.href = "confirmacion.html";
+                    window.location.href = "../Home.html";
 
                 } else {
-                    /* alert("Hubo un error al enviar el voto."); */
+                    alert("Hubo un error al enviar el voto.");
                 }
             })
             .catch(error => {
-              /*   console.error("Error al enviar el voto:", error);
-                alert("No se pudo enviar el voto."); */
-                alert("¡Voto enviado con éxito! Sera redirigido a la pagina de inicio.");
-                document.getElementById('votacion-form').reset();
-                window.location.href = "../Home.html";
-
+                console.error("Error al enviar el voto:", error);
+                alert("No se pudo enviar el voto."); 
 
             });
         }

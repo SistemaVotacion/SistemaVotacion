@@ -13,7 +13,7 @@ namespace ApiPapeleta.Controllers
     [Route("[controller]")]
     public class VotingController : ControllerBase
     {
-        private readonly string _connectionString = "Data Source=localhost;Initial Catalog=sistema_votacion;Integrated Security=True;TrustServerCertificate=True";
+        private readonly string _connectionString = "Data Source=localhost;Initial Catalog=RegistroDeVoto;Integrated Security=True;TrustServerCertificate=True";
 
         [HttpPost("vote")]
         public async Task<IActionResult> PostVote([FromBody] VoteRequest voteRequest)
@@ -26,11 +26,11 @@ namespace ApiPapeleta.Controllers
             using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand("InsertVote", connection))
+                using (SqlCommand command = new SqlCommand("RegistrarVoto", connection))
                 {
                     command.CommandType = CommandType.StoredProcedure;
-                    command.Parameters.AddWithValue("@UserId", voteRequest.UserId);
-                    command.Parameters.AddWithValue("@CandidateId", voteRequest.CandidateId);
+                    command.Parameters.AddWithValue("@Provincia", voteRequest.UserId);
+                    command.Parameters.AddWithValue("@CandidatoId", voteRequest.CandidateId);
 
                     try
                     {

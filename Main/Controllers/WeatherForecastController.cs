@@ -45,16 +45,18 @@ namespace login.Controllers
     {
 
         [HttpPost] 
-        public IActionResult Login([FromBody] LoginRequest request) // se ejecuta cuando el usuario manda datos por el api
+        public async Task<IActionResult> Login([FromBody] LoginRequest request) // se ejecuta cuando el usuario manda datos por el api
         {
             ConexionDB baseDeDatos = new ConexionDB();
 
             //para hacer hasing criptografico para que no se puedan facilmente deducir cedulas desde el sistema, ayuda a mantener el secreto del voto
             byte[] data = Encoding.UTF8.GetBytes(request.Password); // Conveierte contrasenia (cedula) a bytes para hashing
-            byte[] dataCodigo = Encoding.UTF8.GetBytes(request.Password); // Conveierte codigo en reverso de cedula a bytes para hashing
+            byte[] dataCodigo = Encoding.UTF8.GetBytes(request.Codigo); // Conveierte codigo en reverso de cedula a bytes para hashing
             byte[] result; //resultado de hashing en bytes
             byte[] resultCodigo; //resultado de hashing en bytes
-            string resultadoBase54;
+            byte[] entradaResultResultCodigo;
+            byte[] resultFinalHasheado; //resultado de hashing en bytes
+            string resultadoStringHex;
 
             //algoritmo de hashing criptografico
             using (SHA512 sha512 = SHA512.Create())
@@ -62,13 +64,26 @@ namespace login.Controllers
                 result = sha512.ComputeHash(data);
                 resultCodigo = sha512.ComputeHash(dataCodigo);
 
+                entradaResultResultCodigo = new byte[result.Length + resultCodigo.Length];
+                result.CopyTo(entradaResultResultCodigo, 0);
+                resultCodigo.CopyTo(entradaResultResultCodigo, result.Length);
+
+                resultFinalHasheado = sha512.ComputeHash(entradaResultResultCodigo);
+
             }
 
-            resultadoBase54 = System.Convert.ToBase64String(result); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
+
+
+            List<UserAuth> ReslultadoBaseDeDatos = new List<UserAuth>();
+            ReslultadoBaseDeDatos = baseDeDatos.ObtenerDatos(result, resultCodigo);
+
+
+
+            resultadoStringHex = System.Convert.ToHexString(resultFinalHasheado); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
 
 
             //el metorod retorna una lista
-            var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Username);
+            var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Codigo);
 
 
             //falta concatenar la cedula y el dato en la parte de atras de la cedula
@@ -77,15 +92,15 @@ namespace login.Controllers
 
             if (user != null)
             {
-                return Ok(new { message = "https://localhost/"}); //aqui poner URL:  "https://localhost/ + provincia + "-" + hashEnBase64"
+                return Ok(new { message = ("https://localhost/" + provincia + resultadoStringHex + ".html")}); //aqui poner URL:  "https://localhost/ + provincia + "-" + hashEnBase64"
             } 
             return Unauthorized(new { message = "Invalid username or password." });
         }
 
         public class LoginRequest //lo que se acepta de los usuarios
         {
-            public string Username { get; set; }
-            public string Password { get; set; }
+            public string Codigo { get; set; }
+            public string Password { get; set; }    
 
         }
 
@@ -104,7 +119,8 @@ namespace login.Controllers
             private static readonly List<UserAuth> Users = new List<UserAuth>();
 
             // Método para obtener todas las reservas existentes
-            internal List<UserAuth> ObtenerDatos(string contraseniaVer, string usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
+            internal List<UserAuth> ObtenerDatos(byte[] contraseniaVer, byte[] usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
+                //se usa una lista para poder retornar varias cosas a la vez
             {
                 try
                 {
