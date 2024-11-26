@@ -1,6 +1,4 @@
-/* CSS Global */
-* { /* Todo en la pagina */
-
+* {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -43,8 +41,7 @@ header {
     gap: 2rem;
 }
 
-nav a { /* links en header */
-
+nav a {
     color: white;
     text-decoration: none;
     font-size: 1rem;
