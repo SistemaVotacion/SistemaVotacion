@@ -312,7 +312,7 @@
         console.log("ValidacionCodigoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
 
         if (document.getElementById('cedula').value.trim() === ""){
-          document.getElementById('button').setAttribute('onclick', 'nulo()');    
+          document.getElementById("button").disabled 
           alert('introducir codigo');
           console.log("ValidacionCodigoFunciono_Vacio");
         } else if (document.getElementById('cedula').value !=""){
