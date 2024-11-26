@@ -50,34 +50,6 @@ namespace ApiPapeleta.Controllers
             }
         }
 
-        [HttpGet("candidates")]
-        public async Task<IActionResult> GetCandidates()
-        {
-            List<Candidate> candidates = new List<Candidate>();
-
-            using (SqlConnection connection = new SqlConnection(_connectionString))
-            {
-                await connection.OpenAsync();
-                using (SqlCommand command = new SqlCommand("SELECT CandidateId, Name, Party, Province FROM Candidates", connection))
-                {
-                    using (SqlDataReader reader = await command.ExecuteReaderAsync())
-                    {
-                        while (await reader.ReadAsync())
-                        {
-                            candidates.Add(new Candidate
-                            {
-                                Id = reader.GetInt32(0),
-                                Name = reader.GetString(1),
-                                Party = reader.GetString(2),
-                                Province = reader.GetString(3)
-                            });
-                        }
-                    }
-                }
-            }
-
-            return Ok(candidates);
-        }
     }
 
     public class VoteRequest
