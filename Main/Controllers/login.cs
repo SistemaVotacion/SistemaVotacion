@@ -15,6 +15,13 @@ using System.Numerics;
 using System.Text.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
+
+//////////////////IMPORTANTE//////////////////////
+///Desactivar .net hot reload para que el proyecto redirija a las papeletas
+///https://stackoverflow.com/questions/68952259/disabling-hot-reload-for-net-core-project-in-visual-studio-2019
+///"In VS2022, unchecking the "Enable Hot Reload" setting under the projects Debug Properties disables the injection of the aspnetcore-browser-refresh.js script.
+//These screenshots show one way to access the setting:"
+
 /*
  * Carrasco, Nathan
  * Herrera, Francisco
@@ -82,35 +89,18 @@ namespace login.Controllers
 
             bool ReslultadoBaseDeDatos;
             ReslultadoBaseDeDatos = baseDeDatos.Autenticacion(resultadoContraseniaStringHexInterno, resultadoCodigoStringHexInterno);
-            return Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + "papeleta" + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
+            
 
+             //Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + "papeleta" + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
 
-            if (ReslultadoBaseDeDatos)
+            if (ReslultadoBaseDeDatos == true)
             {
-                try
-                {
-                    // Ask the user for the source file path
-                    string sourceFilePath = "PapeletaGit/papeleta.html";
-
-                    string destinationFolder = "Home/PapeletaGit";
-
-                    string newFileName = resultadoStringHexPaginaWeb + ".html";
-
-                    // Create the full destination path
-                    string destinationFilePath = Path.Combine(destinationFolder, newFileName);
-
-                    // Copy the file to the new location
-                    System.IO.File.Copy(sourceFilePath, destinationFilePath);
-
-
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine($"An error occurred: {ex.Message}");
-                }
-
+                generarPapeleta(resultadoStringHexPaginaWeb);
                 ConexionDB conexionDB = new ConexionDB();
                 conexionDB.RegistrarQueVoto(resultadoStringHexPaginaWeb, resultadoContraseniaStringHexInterno);
+
+                return Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + resultadoStringHexPaginaWeb + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
+
 
             }
             else
@@ -212,10 +202,35 @@ namespace login.Controllers
                 }
             }
 
+           
+
 
         }
 
+        internal void generarPapeleta(string resultadoStringHexPaginaWeb)
+        {
+            try
+            {
+                // Ask the user for the source file path
+                string sourceFilePath = "PapeletaGit/papeleta.html";
 
+                string destinationFolder = "Home/PapeletaGit";
+
+                string newFileName = resultadoStringHexPaginaWeb + ".html";
+
+                // Create the full destination path
+                string destinationFilePath = Path.Combine(destinationFolder, newFileName);
+
+                // Copy the file to the new location
+                System.IO.File.Copy(sourceFilePath, destinationFilePath);
+
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine($"An error occurred: {ex.Message}");
+            }
+        }
 
     }
 }
