@@ -19,6 +19,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
  * Carrasco, Nathan
  * Herrera, Francisco
  * Wu, Iván
+ Yasiel Gomez
  */
 
 // este archivo es un api para login con contrasenia (cedula) y codigo en la parte de la cedula (?)
