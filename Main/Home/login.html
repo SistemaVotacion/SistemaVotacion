@@ -180,13 +180,6 @@
         En unos segundos sera redirigido a la pagina de inicio. Gracias.
       </p>
     </section>
-
-    <main class="error-container">
-      <section class="error-content">
-        <p class="error-message">Su cedula no se ha encontrado en el sistema. Puede regresar a revisarla e intentar de nuevo.</p>
-        <button class="return-button" tabindex="0">Regresar</button>
-      </section>
-    </main>
  -->
     
     <footer class="footer">
@@ -198,6 +191,9 @@
       var cedula, codigo;
       var cedula = document.getElementById('cedula').innerHTML;
       var boton = document.getElementById("button");
+      var codigoInterno;
+      var cedulaInterno;
+      var datasetURLPapeleta;
       console.log(cedula);
 
       // apenas carga la pagina, desactivar boton por no haber entrada
@@ -209,6 +205,7 @@
           console.log("desactivar boton por no tener entrada de texto");
 
         }else {
+          document.getElementById("button").disabled = false;
           console.log("activar boton por tener entrada de texto");
 
         } 
@@ -248,7 +245,7 @@
 
         //si la cedula esta vacia
         if (document.getElementById('cedula').value.trim() === ""){
-          document.getElementById('button').setAttribute('onclick', 'nulo()');    
+          document.getElementById("button").disabled 
           alert('introducir cedulaV');
           console.log("ValidacionVacioOInvalidoFunciono_Vacio");
         }
@@ -256,22 +253,14 @@
         //si paso validacion
         if (resultado){
           console.log("ValidacionVacioOInvalidoFunciono_EntradaValida");
+          cedulaInterno = document.getElementById('cedula').value.trim();
           cambiarPantallaACodigo();
         }else{
           alert('Cedula no valida. Por favor intente de nuevo.');
 
         }
+        
 
-      }
-
-      function nulo(){
-        console.log("nulo");
-        alert('introducir cedulaN');
-
-      }
-
-      function nuloa(){
-        console.log("nuloa");
       }
         
       function cambiarPantallaACodigo(){
@@ -286,21 +275,6 @@
         console.log("cambiarPantallaACodigo");
       }
 
-      function cambiarPantallaAPapeleta(){
-                //cambiar contenido de la pagina y redirgir
-
-        document.getElementById('instructions').innerText="En unos segundos sera redirigido a la papeleta de votación. Gracias.";
-          document.getElementById('input-label').remove();
-          document.getElementById('cedula').remove();
-          document.getElementById('button').remove();
-
-          console.log("cambiarPantallaAPapeleta");
-        // redirigir despues de cierto tiempo
-          window.setTimeout(function(){
-            window.location.href = "PapeletaGit/papeleta.html";
-            }, 3000);
-
-      }
 
       function ValidacionCodigo(){
         //validacion para el codigo en la cedula, solo revisa que no este vacio
@@ -308,6 +282,7 @@
         //se desactiva el boton si la entrada esta vacia
         document.getElementById("button").disabled = document.getElementById('cedula').value.trim() === "";
         const resultado = document.getElementById('cedula').value.trim();
+        codigoInterno = document.getElementById('cedula').value.trim();
         console.log("ValidacionCodigoFunciono_NoVacio");
         console.log("ValidacionCodigoFunciono_NoVacio " + resultado + document.getElementById('cedula').value);
 
@@ -323,6 +298,90 @@
 
         }
 
+      }
+
+
+      async function cambiarPantallaAPapeleta(){
+
+          const datosVoto = {
+                codigo: codigoInterno,
+                password: cedulaInterno
+            };
+
+          const myHeaders = new Headers();
+            myHeaders.append("Content-Type", "application/json");
+
+            await fetch('https://localhost:7089/Login', {
+                method: 'POST',
+                body: JSON.stringify(datosVoto),
+                headers: myHeaders,
+            })
+            .then(response => {
+                if (response.ok) {
+                    document.getElementById('instructions').innerText="En unos segundos sera redirigido a la papeleta de votación. Gracias.";
+                    document.getElementById('input-label').remove();
+                    document.getElementById('cedula').remove();
+                    document.getElementById('button').remove();
+
+
+                    // redirigir despues de cierto tiempo
+
+        
+
+
+                } else {
+                  console.log(response)
+
+                    document.getElementById('instructions').innerText="Su cedula no se ha encontrado en el sistema, o usted ya ha ejercido el sufragio. Puede intentar nuevamente.";
+                    document.getElementById('input-label').remove();
+                    document.getElementById('cedula').remove();
+                    document.getElementById('button').remove();
+
+
+                } 
+                return response.json();
+            })
+            .then(urlPapeleta => {
+            datasetURLPapeleta = urlPapeleta;
+             // Guardar datos
+            moverAPapeleta();
+            })
+            .catch(error => {
+              document.getElementById('instructions').innerText="Su cedula no se ha encontrado en el sistema, o usted ya ha ejercido el sufragio. Puede intentar nuevamente.";
+                    document.getElementById('input-label').remove();
+                    document.getElementById('cedula').remove();
+                    document.getElementById('button').remove();
+
+            });
+
+          console.log("cambiarPantallaAPapeleta");
+      }
+
+          function moverAPapeleta() {
+          console.log(datasetURLPapeleta);
+
+          console.log('deapi');
+
+          var datasetConteoVotosInterno =  JSON.stringify(datasetURLPapeleta);
+          console.log(datasetConteoVotosInterno)
+          console.log('deapi');
+
+          datasetConteoVotosInterno = datasetConteoVotosInterno.substring(40);
+          console.log(datasetConteoVotosInterno)
+          datasetConteoVotosInterno = datasetConteoVotosInterno.substring(0, datasetConteoVotosInterno.length - 2);
+          console.log(datasetConteoVotosInterno)
+
+
+          if (datasetURLPapeleta) {
+              // Clear previous results
+
+              window.setTimeout(function(){
+                    window.location.href = datasetConteoVotosInterno;
+                    }, 3000);
+                  
+                  } else {
+              resultDivConteoVotos.innerHTML = '<span style="color: red;">No data found for the selected option.</span>';
+          }
       }
 
       

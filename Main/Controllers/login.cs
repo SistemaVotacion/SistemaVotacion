@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Identity.Data;
 using Microsoft.AspNetCore.Mvc;
 using System.Data;
 using System;
+using System.IO;
 using System.Collections.Generic;
 using Microsoft.Data.SqlClient;
 using System.Linq;
@@ -57,7 +58,7 @@ namespace login.Controllers
             byte[] resultCodigo; //resultado de hashing en bytes
             byte[] entradaResultResultCodigo;
             byte[] resultFinalHasheado; //resultado de hashing en bytes
-            string resultadoStringHex;
+            string resultadoStringHexPaginaWeb;
 
             //algoritmo de hashing criptografico
             using (SHA512 sha512 = SHA512.Create())
@@ -72,39 +73,49 @@ namespace login.Controllers
                 resultFinalHasheado = sha512.ComputeHash(entradaResultResultCodigo);
 
             }
+            resultadoStringHexPaginaWeb = System.Convert.ToHexString(resultFinalHasheado); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
+            string resultadoContraseniaStringHexInterno = System.Convert.ToHexString(result); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
+            string resultadoCodigoStringHexInterno = System.Convert.ToHexString(resultCodigo); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
 
 
 
             bool ReslultadoBaseDeDatos;
-            ReslultadoBaseDeDatos = baseDeDatos.ObtenerDatos(result, resultCodigo);
+            ReslultadoBaseDeDatos = baseDeDatos.Autenticacion(resultadoContraseniaStringHexInterno, resultadoCodigoStringHexInterno);
+            return Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + "papeleta" + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
 
 
-
-
-
-
-
-
-
-
-
-
-            resultadoStringHex = System.Convert.ToHexString(resultFinalHasheado); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
-
-
-            //el metorod retorna una lista
-            var usuarioLogin = baseDeDatos.ObtenerDatos(request.Password, request.Codigo);
-
-
-            //falta concatenar la cedula y el dato en la parte de atras de la cedula
-
-            var user = usuarioLogin.FirstOrDefault(u => u.Username == result && u.Password == resultCodigo); // verificar usuario
-
-            if (user != null)
+            if (ReslultadoBaseDeDatos)
             {
-                return Ok(new { message = ("https://localhost/" + provincia + resultadoStringHex + ".html")}); //aqui poner URL:  "https://localhost/ + provincia + "-" + hashEnBase64"
-            } 
-            return Unauthorized(new { message = "Invalid username or password." });
+                try
+                {
+                    // Ask the user for the source file path
+                    string sourceFilePath = "PapeletaGit/papeleta.html";
+
+                    string destinationFolder = "Home/PapeletaGit";
+
+                    string newFileName = resultadoStringHexPaginaWeb + ".html";
+
+                    // Create the full destination path
+                    string destinationFilePath = Path.Combine(destinationFolder, newFileName);
+
+                    // Copy the file to the new location
+                    System.IO.File.Copy(sourceFilePath, destinationFilePath);
+
+
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"An error occurred: {ex.Message}");
+                }
+
+                ConexionDB conexionDB = new ConexionDB();
+                conexionDB.RegistrarQueVoto(resultadoStringHexPaginaWeb, resultadoContraseniaStringHexInterno);
+
+            }
+            else
+            {
+                return Unauthorized(new { message = "Invalid username or password." });
+            }
         }
 
         public class LoginRequest //lo que se acepta de los usuarios
@@ -123,43 +134,43 @@ namespace login.Controllers
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=SistemaVotacionPadron;Integrated Security=True;TrustServerCertificate=True";
-
-
-            private static readonly List<UserAuth> Users = new List<UserAuth>();
+            private string detallesConexion = "Data Source=localhost;Initial Catalog=PadronElectoral;Integrated Security=True;TrustServerCertificate=True";
 
             // Método para obtener todas las reservas existentes
-            internal bool ObtenerDatos(byte[] contraseniaVer, byte[] usuarioVer) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
+            internal bool Autenticacion(string contraseniaVer, string codigo) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
                 //se usa una lista para poder retornar varias cosas a la vez
             {
+
+                bool Users;
+
                 try
                 {
                     using (SqlConnection conexion = new SqlConnection(detallesConexion)) {
-                        await connection.OpenAsync();
+                        //await connection.OpenAsync();
 
 
-                        SqlCommand command = new SqlCommand("CrearReserva", conexion);
+                        SqlCommand command = new SqlCommand("Autenticacion", conexion);
                         command.CommandType = CommandType.StoredProcedure;
 
                         // Agregar los parámetros del procedimiento
-                        command.Parameters.AddWithValue("@contrasenia", contraseniaVer);
-                        command.Parameters.AddWithValue("@usuario", usuarioVer);
-                        command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+                        command.Parameters.AddWithValue("@cedula", contraseniaVer);
+                        command.Parameters.AddWithValue("@pin", codigo);
+                      //  command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
 
                         // Abrir la conexión y ejecutar el procedimiento almacenado
                         command.Connection.Open();
-                        SqlDataReader reader = command.ExecuteReader();
+                        int result = (int)command.ExecuteScalar();
+                        command.Connection.Close();
 
-                        while (reader.Read())
+                        if (result == 1)
                         {
-                            Users.Add(new UserAuth()
-                            {
-                                Username = (byte[])reader[0], //username y password estan especificados en la clase UserAuth
-                                Password = (byte[])reader[1],
-                            });
-                        }
-                        reader.Close();
+                            Users = true;
 
+                        }
+                        else
+                        {
+                            Users = false;
+                        }
                     }
                 }
                 catch (SqlException ex)
@@ -168,6 +179,39 @@ namespace login.Controllers
                 }
                 return Users;
             }
+
+            internal void RegistrarQueVoto(string link, string contraseniaRegistrar) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
+                                                                             //se usa una lista para poder retornar varias cosas a la vez
+            {
+                try
+                {
+                    using (SqlConnection conexion = new SqlConnection(detallesConexion))
+                    {
+                        //await connection.OpenAsync();
+
+
+                        SqlCommand command = new SqlCommand("InsertVarcharValue", conexion);
+                        command.CommandType = CommandType.StoredProcedure;
+
+                        // Agregar los parámetros del procedimiento
+                        command.Parameters.AddWithValue("@link", link);
+                        command.Parameters.AddWithValue("@cedula_hash", contraseniaRegistrar);
+
+                        //  command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
+
+                        // Abrir la conexión y ejecutar el procedimiento almacenado
+                        command.Connection.Open();
+                        command.ExecuteNonQuery();
+                        command.Connection.Close();
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("Error al obtener libros: " + ex.Message);
+                }
+            }
+
+
         }
 
 
