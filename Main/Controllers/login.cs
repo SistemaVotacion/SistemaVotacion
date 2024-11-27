@@ -15,6 +15,7 @@ using System.Numerics;
 using System.Text.Json;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
+//datos de prueba: codigo: ni0264, cedula 8-1005-1990
 
 //////////////////IMPORTANTE//////////////////////
 ///Desactivar .net hot reload para que el proyecto redirija a las papeletas
@@ -31,34 +32,26 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 // este archivo es un api para login con contrasenia (cedula) y codigo en la parte de la cedula (?)
 
-//falta mientras la votación esta en progreso el número de votos por candidato
-//podría ser 0 si la base de datos no se puede acceder por estar bloqueada durante la votación 
-
-
 namespace login.Controllers
 {
     [ApiController]
     [Route("[controller]")]
     public class LoginController : ControllerBase
     {
-
-        [HttpPost] 
-        public async Task<IActionResult> Login([FromBody] LoginRequest request) // se ejecuta cuando el usuario manda datos por el api
+        [HttpPost]
+        public async Task<IActionResult> Login([FromBody] LoginRequest request) // Ejecutado cuando el usuario envía datos por el API
         {
-            ConexionDB baseDeDatos = new ConexionDB();
+            var baseDeDatos = new ConexionDB();
 
-            //para hacer hasing criptografico para que no se puedan facilmente deducir cedulas desde el sistema, ayuda a mantener el secreto del voto
+            // Hashing criptográfico
             byte[] data = Encoding.UTF8.GetBytes(request.Password); // Conveierte contrasenia (cedula) a bytes para hashing
             byte[] dataCodigo = Encoding.UTF8.GetBytes(request.Codigo); // Conveierte codigo en reverso de cedula a bytes para hashing
-            byte[] result; //resultado de hashing en bytes
-            byte[] resultCodigo; //resultado de hashing en bytes
-            byte[] entradaResultResultCodigo;
-            byte[] resultFinalHasheado; //resultado de hashing en bytes
+            byte[] result, resultCodigo, entradaResultResultCodigo, resultFinalHasheado;
             string resultadoStringHexPaginaWeb;
 
-            //algoritmo de hashing criptografico
             using (SHA512 sha512 = SHA512.Create())
             {
+                //algoritmo de hashing criptografico
                 result = sha512.ComputeHash(data);
                 resultCodigo = sha512.ComputeHash(dataCodigo);
 
@@ -67,29 +60,20 @@ namespace login.Controllers
                 resultCodigo.CopyTo(entradaResultResultCodigo, result.Length);
 
                 resultFinalHasheado = sha512.ComputeHash(entradaResultResultCodigo);
-
             }
-            resultadoStringHexPaginaWeb = System.Convert.ToHexString(resultFinalHasheado); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
-            string resultadoContraseniaStringHexInterno = System.Convert.ToHexString(result); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
-            string resultadoCodigoStringHexInterno = System.Convert.ToHexString(resultCodigo); //convertir hash en bytes a string en base64; timar en cuenta el limite de largo de un URL es 2048 letras
 
+            resultadoStringHexPaginaWeb = Convert.ToHexString(resultFinalHasheado); //convertir hash en bytes a string hex; timar en cuenta el limite de largo de un URL es 2048 letras
+            string resultadoContraseniaStringHexInterno = Convert.ToHexString(result);
+            string resultadoCodigoStringHexInterno = Convert.ToHexString(resultCodigo);
 
+            bool ReslultadoBaseDeDatos = await baseDeDatos.AutenticacionAsync(resultadoContraseniaStringHexInterno, resultadoCodigoStringHexInterno);
 
-            bool ReslultadoBaseDeDatos;
-            ReslultadoBaseDeDatos = baseDeDatos.Autenticacion(resultadoContraseniaStringHexInterno, resultadoCodigoStringHexInterno);
-            
-
-             //Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + "papeleta" + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
-
-            if (ReslultadoBaseDeDatos == true)
+            if (ReslultadoBaseDeDatos)
             {
-                generarPapeleta(resultadoStringHexPaginaWeb);
-                ConexionDB conexionDB = new ConexionDB();
-                conexionDB.RegistrarQueVoto(resultadoStringHexPaginaWeb, resultadoContraseniaStringHexInterno);
+                await generarPapeletaAsync(resultadoStringHexPaginaWeb);
+                await baseDeDatos.RegistrarQueVotoAsync(resultadoStringHexPaginaWeb, resultadoContraseniaStringHexInterno);
 
-                return Ok(new { message = ("https://localhost:7089/Home/PapeletaGit/" + resultadoStringHexPaginaWeb + ".html") }); //aqui poner URL: resultadoStringHexPaginaWeb  "https://localhost/  + provincia + "-" + hashEnBase64" // + provincia + resultadoStringHexPaginaWeb + ".html"
-
-
+                return Ok(new { message = $"https://localhost:7089/Home/PapeletaGit/{resultadoStringHexPaginaWeb}.html" });
             }
             else
             {
@@ -97,128 +81,85 @@ namespace login.Controllers
             }
         }
 
-        public class LoginRequest //lo que se acepta de los usuarios
+        public class LoginRequest
         {
             public string Codigo { get; set; }
-            public string Password { get; set; }    
-
-        }
-
-        public class UserAuth // para uso interno del progrma, como guardar datos
-        {
-            public byte[] Username { get; set; }
-            public byte[] Password { get; set; }
-
+            public string Password { get; set; }
         }
 
         internal class ConexionDB
         {
-            private string detallesConexion = "Data Source=localhost;Initial Catalog=PadronElectoral;Integrated Security=True;TrustServerCertificate=True";
-
-            // Método para obtener todas las reservas existentes
-            internal bool Autenticacion(string contraseniaVer, string codigo) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
-                //se usa una lista para poder retornar varias cosas a la vez
-            {
-
-                bool Users;
-
-                try
-                {
-                    using (SqlConnection conexion = new SqlConnection(detallesConexion)) {
-                        //await connection.OpenAsync();
-
-
-                        SqlCommand command = new SqlCommand("Autenticacion", conexion);
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        // Agregar los parámetros del procedimiento
-                        command.Parameters.AddWithValue("@cedula", contraseniaVer);
-                        command.Parameters.AddWithValue("@pin", codigo);
-                      //  command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
-
-                        // Abrir la conexión y ejecutar el procedimiento almacenado
-                        command.Connection.Open();
-                        int result = (int)command.ExecuteScalar();
-                        command.Connection.Close();
-
-                        if (result == 1)
-                        {
-                            Users = true;
-
-                        }
-                        else
-                        {
-                            Users = false;
-                        }
-                    }
-                }
-                catch (SqlException ex)
-                {
-                    throw new Exception("Error al obtener libros: " + ex.Message);
-                }
-                return Users;
-            }
-
-            internal void RegistrarQueVoto(string link, string contraseniaRegistrar) //lista donde los contenidos de los slementos se especifican en la clase UserAuth
-                                                                             //se usa una lista para poder retornar varias cosas a la vez
+            private readonly string detallesConexion = "Data Source=localhost;Initial Catalog=PadronElectoral;Integrated Security=True;TrustServerCertificate=True";
+            // Método para autenticar usuario
+            internal async Task<bool> AutenticacionAsync(string contraseniaVer, string codigo)
             {
                 try
                 {
                     using (SqlConnection conexion = new SqlConnection(detallesConexion))
                     {
-                        //await connection.OpenAsync();
+                        await conexion.OpenAsync();
 
+                        using (SqlCommand command = new SqlCommand("Autenticacion", conexion))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@cedula", contraseniaVer);
+                            command.Parameters.AddWithValue("@pin", codigo);
 
-                        SqlCommand command = new SqlCommand("InsertVarcharValue", conexion);
-                        command.CommandType = CommandType.StoredProcedure;
-
-                        // Agregar los parámetros del procedimiento
-                        command.Parameters.AddWithValue("@link", link);
-                        command.Parameters.AddWithValue("@cedula_hash", contraseniaRegistrar);
-
-                        //  command.Parameters.Add("@returnValue", SqlDbType.Int).Direction = ParameterDirection.ReturnValue;
-
-                        // Abrir la conexión y ejecutar el procedimiento almacenado
-                        command.Connection.Open();
-                        command.ExecuteNonQuery();
-                        command.Connection.Close();
+                            int result = (int)await command.ExecuteScalarAsync();
+                            return result == 1;
+                        }
                     }
                 }
                 catch (SqlException ex)
                 {
-                    throw new Exception("Error al obtener libros: " + ex.Message);
+                    throw new Exception("Error en la autenticación: " + ex.Message);
                 }
             }
 
-           
+            internal async Task RegistrarQueVotoAsync(string link, string contraseniaRegistrar)
+            {
+                try
+                {
+                    using (SqlConnection conexion = new SqlConnection(detallesConexion))
+                    {
+                        await conexion.OpenAsync();
 
+                        using (SqlCommand command = new SqlCommand("InsertVarcharValue", conexion))
+                        {
+                            command.CommandType = CommandType.StoredProcedure;
+                            command.Parameters.AddWithValue("@link", link);
+                            command.Parameters.AddWithValue("@cedula_hash", contraseniaRegistrar);
 
+                            await command.ExecuteNonQueryAsync();
+                        }
+                    }
+                }
+                catch (SqlException ex)
+                {
+                    throw new Exception("Error al registrar el voto: " + ex.Message);
+                }
+            }
         }
 
-        internal void generarPapeleta(string resultadoStringHexPaginaWeb)
+        private async Task generarPapeletaAsync(string resultadoStringHexPaginaWeb)
         {
             try
             {
-                // Ask the user for the source file path
                 string sourceFilePath = "PapeletaGit/papeleta.html";
-
                 string destinationFolder = "Home/PapeletaGit";
-
-                string newFileName = resultadoStringHexPaginaWeb + ".html";
-
-                // Create the full destination path
+                string newFileName = $"{resultadoStringHexPaginaWeb}.html";
                 string destinationFilePath = Path.Combine(destinationFolder, newFileName);
 
-                // Copy the file to the new location
-                System.IO.File.Copy(sourceFilePath, destinationFilePath);
-
-
+                using (FileStream sourceStream = new FileStream(sourceFilePath, FileMode.Open, FileAccess.Read))
+                using (FileStream destinationStream = new FileStream(destinationFilePath, FileMode.Create, FileAccess.Write))
+                {
+                    await sourceStream.CopyToAsync(destinationStream);
+                }
             }
             catch (Exception ex)
             {
-                Console.WriteLine($"An error occurred: {ex.Message}");
+                throw new Exception($"Error al generar la papeleta: {ex.Message}");
             }
         }
-
     }
 }
