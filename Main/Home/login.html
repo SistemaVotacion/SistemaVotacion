@@ -267,8 +267,8 @@
 
         //cambiar contenido de la pagina 
         document.getElementById('greeting').innerText="";
-        document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"NI\".";
-        document.getElementById('input-label').innerText="Código";
+        document.getElementById('instructions').innerText="Para verificar su identidad, por favor introduzca el codigo al reverso de su cedula, ubicado en la esquina inferior derecha, que empieza con las letras \"ni\".";
+        document.getElementById('input-label').innerText="Codigo";
         document.getElementById('button').setAttribute('onclick', 'ValidacionCodigo()');    
         document.getElementById('cedula').value = "";
         var codigo = document.getElementById('cedula').value;
@@ -375,10 +375,14 @@
           if (datasetURLPapeleta) {
               // Clear previous results
 
+              if (datasetConteoVotosInterno != "."){
+
               window.setTimeout(function(){
                     window.location.href = datasetConteoVotosInterno;
                     }, 3000);
                   
+                  }
+
                   } else {
               resultDivConteoVotos.innerHTML = '<span style="color: red;">No data found for the selected option.</span>';
           }
