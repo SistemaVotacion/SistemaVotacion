@@ -6,7 +6,17 @@ using Microsoft.Data.SqlClient;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
+
+/*
+ * Carrasco, Nathan
+ * Herrera, Francisco
+ * Wu, Iván
+ * Yasiel Gomez
+ */
+
 // Namespace
+
+
 namespace ApiPapeleta.Controllers
 {
     [ApiController]
