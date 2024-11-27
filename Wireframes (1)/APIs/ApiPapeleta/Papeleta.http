@@ -1,6 +1,0 @@
-@Papeleta_HostAddress = http://localhost:5049
-
-GET {{Papeleta_HostAddress}}/weatherforecast/
-Accept: application/json
-
-###
