@@ -2,6 +2,13 @@ using API_VotoTotal.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
+/*
+ * Carrasco, Nathan
+ * Herrera, Francisco
+ * Wu, Iván
+ * Yasiel Gomez
+ */
+
 namespace API_VotoTotal.Controllers
 {
     [ApiController]
