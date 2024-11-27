@@ -45,6 +45,8 @@ namespace ApiPapeleta.Controllers
                     try
                     {
                         await command.ExecuteNonQueryAsync();
+
+
                         return Ok(new { message = "Vote recorded successfully." });
                     }
                     catch (SqlException ex)
